@@ -111,6 +111,8 @@ public class Plyaer : MonoBehaviour
         camRot *= Quaternion.Euler(-rotX, 0, 0);      //カメラの移動先を決める
         charaRot *= Quaternion.Euler(0, rotY, 0);      //キャラクターの移動先を決める(カメラをキャラクターの傘下に入れているためキャラクターの向きを変えればカメラの向きも変わる)
 
+        camRot = ClampRotation(camRot);
+
         cam.transform.localRotation = camRot;           //決めた移動先に実際に動かす
         transform.localRotation = charaRot;         //決めた移動先に実際に動かす
     }
@@ -144,6 +146,11 @@ public class Plyaer : MonoBehaviour
         q.y /= q.w;
         q.z /= q.w;
         q.w = 1.0f;
+
+        float angleX = Mathf.Atan(q.x) * Mathf.Rad2Deg * 2f;
+        angleX = Mathf.Clamp(angleX, angleMinX, angleMaxX);
+        q.x = Mathf.Tan(angleX * Mathf.Deg2Rad * 0.5f);
+
         return q;
     }
 }
