@@ -8,7 +8,9 @@ public class Plyaer : MonoBehaviour
 {
     //プレイヤー
     [SerializeField] private float acceleration = 100.0f;       //プレイヤーの加速度
-    [SerializeField] private float maxSpeed = 10.0f;            //プレイヤー最大速度
+    [SerializeField] private float maxSpeed     =  10.0f;        //プレイヤー最大速度
+    [SerializeField] private float runMaxSpeed  =  10.0f;        //走り時の最大速度   
+    [SerializeField] private float walkMaxSpeed =   5.0f;        //歩き時の最大速度
     private float moveX = 0.0f;                                 //プレイヤーのX軸の速度
     private float moveZ = 0.0f;                                 //プレイヤーのY軸の速度
     [SerializeField] private float jumpPower = 5.0f;           //ジャンプ力
@@ -16,7 +18,7 @@ public class Plyaer : MonoBehaviour
     Rigidbody rb;
 
     //カメラ
-    public GameObject cam;                                      //カメラ
+    [SerializeField] private GameObject cam;                                      //カメラ
     Quaternion camRot;                                          //カメラの回転量
     Quaternion charaRot;                                        //キャラクターの回転量
     [SerializeField] private float sensityvity = 1.0f;          //感度
@@ -24,6 +26,10 @@ public class Plyaer : MonoBehaviour
     private float angleMaxX = 90.0f;
 
     private bool cursorLock = true;
+
+
+    //アニメーション
+    [SerializeField] private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +48,7 @@ public class Plyaer : MonoBehaviour
         DragSwitch();
         CameraControl();
         UpdataCursorLock();
+        PlayerAnimation();
     }
     void FixedUpdate()
     {
@@ -52,7 +59,7 @@ public class Plyaer : MonoBehaviour
         }
     }
 
-    private void PlayerMove()                               //プレイヤーの動き
+    private void PlayerMove()                                         //プレイヤーの動き
     {
         float x = 0.0f;
         float z = 0.0f;
@@ -83,7 +90,7 @@ public class Plyaer : MonoBehaviour
         moveZ = z * acceleration;
     }
 
-    private void OnCollisionEnter(Collision collision)              //地面との当たり判定
+    private void OnCollisionEnter(Collision collision)                //地面との当たり判定
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
@@ -91,7 +98,7 @@ public class Plyaer : MonoBehaviour
         }
     }
 
-    private void DragSwitch()                                        //dragの数値を変える
+    private void DragSwitch()                                         //dragの数値を変える
     {
         if (isGround)
         {
@@ -117,7 +124,7 @@ public class Plyaer : MonoBehaviour
         transform.localRotation = charaRot;         //決めた移動先に実際に動かす
     }
 
-    private void UpdataCursorLock()                         //マウスカーソルを消したりつけたり
+    private void UpdataCursorLock()                                   //マウスカーソルを消したりつけたり
     {
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -152,6 +159,51 @@ public class Plyaer : MonoBehaviour
         q.x = Mathf.Tan(angleX * Mathf.Deg2Rad * 0.5f);
 
         return q;
+    }                 //カメラ移動制限
+
+    private void PlayerAnimation()
+    {
+        //射撃
+        if (Input.GetMouseButton(0))
+        {
+            animator.SetTrigger("Fire");
+        }
+
+        //リロード
+        if (Input.GetKeyDown(KeyCode.R)) 
+        {
+            animator.SetTrigger("Reload");
+        }
+        
+        //歩き
+        if (moveX != 0 || moveZ != 0)
+        {
+            if (!animator.GetBool("Walk"))
+            {
+                animator.SetBool("Walk", true);
+                maxSpeed = walkMaxSpeed;
+            }
+        }
+        else if (animator.GetBool("Walk"))
+        {
+            animator.SetBool("Walk", false);
+        }
+        
+        //走り
+        if (moveZ > 0 && Input.GetKey(KeyCode.LeftShift)) 
+        {
+            if (!animator.GetBool("Run"))
+            {
+                animator.SetBool("Run", true);
+                maxSpeed = runMaxSpeed;
+            }
+        }
+        else if (animator.GetBool("Run"))
+        {
+            animator.SetBool("Run", false);
+            maxSpeed = walkMaxSpeed;
+        }
+
     }
 }
 
