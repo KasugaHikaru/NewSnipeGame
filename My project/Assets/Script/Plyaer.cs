@@ -140,7 +140,10 @@ public class Plyaer : MonoBehaviour
 
     private Quaternion ClampRotation(Quaternion q)
     {
-
+        q.x /= q.w;
+        q.y /= q.w;
+        q.z /= q.w;
+        q.w = 1.0f;
         return q;
     }
 }
