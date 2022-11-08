@@ -17,8 +17,9 @@ public class Plyaer : MonoBehaviour
     private bool isGround = false;                             //地面と接地しているか
     Rigidbody rb;
 
+
     //カメラ
-    [SerializeField] private GameObject cam;                                      //カメラ
+    [SerializeField] private GameObject cam;                    //カメラ
     Quaternion camRot;                                          //カメラの回転量
     Quaternion charaRot;                                        //キャラクターの回転量
     [SerializeField] private float sensityvity = 1.0f;          //感度
@@ -31,6 +32,13 @@ public class Plyaer : MonoBehaviour
     //アニメーション
     [SerializeField] private Animator animator;
 
+
+    //武器
+    int ammo       = 120;               //持ってる弾薬数
+    int maxAmmo    = 120;               //持てる最大の弾薬数
+    int clipAmmo    = 25;               //マガジン内の弾薬数
+    int maxClipAmmo = 25;               //最大のマガジン内の弾薬数
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +46,7 @@ public class Plyaer : MonoBehaviour
         rb = GetComponent<Rigidbody>();                         //rbにRigidbodyの情報を格納
         camRot = cam.transform.localRotation;                 //camRotにcam(カメラ)の回角度を格納
         charaRot = transform.localRotation;                     //charaRotにコンポーネント先(プレイヤー)の回角度を格納
-
+        GameState.canShoot = true;
     }
 
     // Update is called once per frame
@@ -164,9 +172,10 @@ public class Plyaer : MonoBehaviour
     private void PlayerAnimation()
     {
         //射撃
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && GameState.canShoot) 
         {
             animator.SetTrigger("Fire");
+            GameState.canShoot = false;
         }
 
         //リロード

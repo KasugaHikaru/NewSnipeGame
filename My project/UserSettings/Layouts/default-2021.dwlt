@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 20
+  controlID: 113
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 119
+  controlID: 112
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 51
+  controlID: 41
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -448,23 +448,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/model/Player/animotion
+    - Assets/Script
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/model/Player/animotion
+  - Assets/Script
   m_LastFoldersGridSize: 64
-  m_LastProjectPath: "C:\\Users\\hikar\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\new
-    asd\\My project"
+  m_LastProjectPath: "C:\\Users\\hikar\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\asd\\My
+    project"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 7e950000
-    m_LastClickedID: 38270
-    m_ExpandedIDs: 000000007c950000809500008295000000ca9a3b
+    m_SelectedIDs: 80950000
+    m_LastClickedID: 38272
+    m_ExpandedIDs: 000000007a9500007c950000fe97000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -536,7 +536,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 12}
+      m_ClientGUIView: {fileID: 2}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -865,9 +865,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 7.871616, y: -0.16230488, z: -9.818991}
+    m_Target: {x: -6.4811745, y: 0.7481326, z: 4.09395}
     speed: 2
-    m_Value: {x: 7.871616, y: -0.16230488, z: -9.818991}
+    m_Value: {x: -6.4811745, y: 0.7481326, z: 4.09395}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -914,13 +914,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.104957275, y: 0.7178226, z: -0.11092236, w: 0.6792592}
+    m_Target: {x: 0.100549534, y: 0.7074709, z: -0.102812506, w: 0.69194233}
     speed: 2
-    m_Value: {x: 0.104958214, y: 0.71782905, z: -0.11092335, w: 0.67926526}
+    m_Value: {x: 0.10055055, y: 0.70747805, z: -0.10281354, w: 0.6919493}
   m_Size:
-    m_Target: 3.0530653
+    m_Target: 1.4595608
     speed: 2
-    m_Value: 3.0530653
+    m_Value: 1.4595608
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -978,7 +978,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 30bdffffa8beffffac9500004e9600008496000094960000069700002c970000309700006e970000c6970000
+      m_ExpandedIDs: 8cbdffffa8beffff92950000a09500004296000078960000889600002097000024970000ba970000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
