@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Plyaer : MonoBehaviour
 {
+
     //プレイヤー
     [SerializeField] private float acceleration = 100.0f;       //プレイヤーの加速度
     [SerializeField] private float maxSpeed     =  10.0f;        //プレイヤー最大速度
@@ -32,13 +33,6 @@ public class Plyaer : MonoBehaviour
     //アニメーション
     [SerializeField] private Animator animator;
 
-
-    //武器
-    int ammo       = 120;               //持ってる弾薬数
-    int maxAmmo    = 120;               //持てる最大の弾薬数
-    int clipAmmo    = 25;               //マガジン内の弾薬数
-    int maxClipAmmo = 25;               //最大のマガジン内の弾薬数
-
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +40,6 @@ public class Plyaer : MonoBehaviour
         rb = GetComponent<Rigidbody>();                         //rbにRigidbodyの情報を格納
         camRot = cam.transform.localRotation;                 //camRotにcam(カメラ)の回角度を格納
         charaRot = transform.localRotation;                     //charaRotにコンポーネント先(プレイヤー)の回角度を格納
-        GameState.canShoot = true;
     }
 
     // Update is called once per frame
@@ -155,7 +148,7 @@ public class Plyaer : MonoBehaviour
 
     }
 
-    private Quaternion ClampRotation(Quaternion q)
+    private Quaternion ClampRotation(Quaternion q)                    //カメラ移動制限
     {
         q.x /= q.w;
         q.y /= q.w;
@@ -167,22 +160,10 @@ public class Plyaer : MonoBehaviour
         q.x = Mathf.Tan(angleX * Mathf.Deg2Rad * 0.5f);
 
         return q;
-    }                 //カメラ移動制限
+    }                
 
     private void PlayerAnimation()
     {
-        //射撃
-        if (Input.GetMouseButton(0) && GameState.canShoot) 
-        {
-            animator.SetTrigger("Fire");
-            GameState.canShoot = false;
-        }
-
-        //リロード
-        if (Input.GetKeyDown(KeyCode.R)) 
-        {
-            animator.SetTrigger("Reload");
-        }
         
         //歩き
         if (moveX != 0 || moveZ != 0)
