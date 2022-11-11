@@ -145,7 +145,6 @@ public class Plyaer : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
         }
-
     }
 
     private Quaternion ClampRotation(Quaternion q)                    //ƒJƒƒ‰ˆÚ“®§ŒÀ
