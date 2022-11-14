@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_ : MonoBehaviour
-{
-
+{ 
     Quaternion charaRot;
     Rigidbody rb;
     [SerializeField] private float speed=2f;
     [SerializeField] private float sensityvity = 1.0f;
     [SerializeField] private float jumpPower = 1.0f;
-    private bool isGround = false;
-    private enum Equip
-    {
-        Pistol,
-        b,
-        c,
-    }
+    private bool isGround;
+    //private float mouseSclor= Input.GetAxis("Mouse ScrollWheel");
+
+    [SerializeField] private GameObject[] wepon;
+    private int weponNumber;
+    private int nowWeponNuber;
+    [SerializeField] private Transform equipTransform;
+
 
     [SerializeField] private GameObject cam;
     Quaternion camRot;
@@ -43,11 +43,15 @@ public class Player_ : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         camRot = cam.transform.localRotation;
         charaRot = transform.localRotation;
+        isGround = false;
+        weponNumber = 1;
+        nowWeponNuber = 0;
+        ChangeWepon(weponNumber);
     }
 
     public void PlayerCtrl()
     {
-
+        //移動
         Vector3 move = new Vector3();
 
         if (Input.GetKey(KeyCode.W))
@@ -75,6 +79,31 @@ public class Player_ : MonoBehaviour
 
         transform.position += ((transform.forward * move.z) + (transform.right * move.x)) * speed * Time.deltaTime;
 
+
+        //武器チェン
+        if (Input.GetKeyDown("1"))
+        {
+            weponNumber = 1;
+            ChangeWepon(weponNumber);
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            weponNumber = 2;
+            ChangeWepon(weponNumber);
+        }
+    }
+
+    public void ChangeWepon(int valu)
+    {
+        if (nowWeponNuber!=0)
+        {
+            Destroy(equipTransform.GetChild(0).gameObject);
+        }
+
+        GameObject NowWepon;
+        NowWepon = Instantiate(wepon[valu], equipTransform.transform.position, equipTransform.transform.rotation, equipTransform);
+        nowWeponNuber = valu;
+
     }
 
     public void CamCtrl()
@@ -91,6 +120,7 @@ public class Player_ : MonoBehaviour
         transform.localRotation = charaRot;
     }
 
+
     private void OnCollisionEnter(Collision collision)                //地面との当たり判定
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -98,6 +128,7 @@ public class Player_ : MonoBehaviour
             isGround = true;
         }
     }
+
 
     private Quaternion ClampRotation(Quaternion q)                    //カメラ移動制限
     {
@@ -112,6 +143,8 @@ public class Player_ : MonoBehaviour
 
         return q;
     }
+
+
     private void UpdataCursorLock()                                   //マウスカーソルを消したりつけたり
     {
 
