@@ -10,12 +10,13 @@ public class Player_ : MonoBehaviour
     [SerializeField] private float sensityvity = 1.0f;
     [SerializeField] private float jumpPower = 1.0f;
     private bool isGround;
-    //private float mouseSclor= Input.GetAxis("Mouse ScrollWheel");
+ 
 
-    [SerializeField] private GameObject[] wepon;
-    private int weponNumber;
-    private int nowWeponNuber;
-    [SerializeField] private Transform equipTransform;
+   //[SerializeField] private GameObject[] wepon;
+   //private int weponNumber;
+   //private int nowWeponNumber;
+   //[SerializeField] private Transform equipTransform;
+    
 
 
     [SerializeField] private GameObject cam;
@@ -44,9 +45,9 @@ public class Player_ : MonoBehaviour
         camRot = cam.transform.localRotation;
         charaRot = transform.localRotation;
         isGround = false;
-        weponNumber = 1;
-        nowWeponNuber = 0;
-        ChangeWepon(weponNumber);
+       // weponNumber = 1;
+       // nowWeponNumber = 0;
+       // ChangeWepon(weponNumber);
     }
 
     public void PlayerCtrl()
@@ -81,30 +82,31 @@ public class Player_ : MonoBehaviour
 
 
         //ïêäÌÉ`ÉFÉì
-        if (Input.GetKeyDown("1"))
-        {
-            weponNumber = 1;
-            ChangeWepon(weponNumber);
-        }
-        if (Input.GetKeyDown("2"))
-        {
-            weponNumber = 2;
-            ChangeWepon(weponNumber);
-        }
+       // if (Input.GetKeyDown("1"))
+       // {
+       //     weponNumber = 1;
+       //     ChangeWepon(weponNumber);
+       // }
+       // if (Input.GetKeyDown("2"))
+       // {
+       //     weponNumber = 2;
+       //     ChangeWepon(weponNumber);
+       // }
     }
 
-    public void ChangeWepon(int valu)
-    {
-        if (nowWeponNuber!=0)
-        {
-            Destroy(equipTransform.GetChild(0).gameObject);
-        }
 
-        GameObject NowWepon;
-        NowWepon = Instantiate(wepon[valu], equipTransform.transform.position, equipTransform.transform.rotation, equipTransform);
-        nowWeponNuber = valu;
-
-    }
+  // public void ChangeWepon(int valu)
+  // {
+  //     if (nowWeponNumber!=0)
+  //     {
+  //         Destroy(equipTransform.GetChild(0).gameObject);
+  //     }
+  //
+  //     GameObject NowWepon;
+  //     NowWepon = Instantiate(wepon[valu], equipTransform.transform.position, equipTransform.transform.rotation, equipTransform);
+  //     nowWeponNumber = valu;
+  //     
+  // }
 
     public void CamCtrl()
     {
