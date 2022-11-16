@@ -855,7 +855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootRateNum: 0
   clipAmmo: 0
-  muzlle: {fileID: 0}
+  muzzle: {fileID: 0}
   wepon:
   - {fileID: 0}
   - {fileID: 746124240919057229, guid: 81c86a48778e6694a9fe74197f41aaba, type: 3}

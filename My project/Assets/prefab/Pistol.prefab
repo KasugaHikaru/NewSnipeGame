@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 3474034976411586878}
   - component: {fileID: 5720258552054973554}
   m_Layer: 0
-  m_Name: Muzzle
+  m_Name: MuzzlePosi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

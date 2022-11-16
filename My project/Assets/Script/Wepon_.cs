@@ -7,8 +7,8 @@ public class Wepon_ : MonoBehaviour
 
     [SerializeField] private float shootRateNum = 0.0f;         //発射レート確認用の変数   
     [SerializeField] private int   clipAmmo;                    //マガジン内の弾薬数
-    private bool canShoot=true;
-    [SerializeField] private GameObject muzlle;
+    private bool canShoot;
+    [SerializeField] private GameObject muzzle;
 
     [SerializeField] private GameObject[] wepon;
     private int weponNumber;
@@ -34,12 +34,8 @@ public class Wepon_ : MonoBehaviour
     {
         weponNumber = 1;
         nowWeponNumber = 0;
+        canShoot = true;
         ChangeWepon(weponNumber);
-    }
-
-    public WeponStatus GetWeaponStatus()
-    {
-        return weponStatus;
     }
 
     public void ChangeWepon(int valu)
@@ -54,15 +50,17 @@ public class Wepon_ : MonoBehaviour
         nowWeponNumber = valu;
         weponStatus = wepon[valu].GetComponent<WeponStatus>();
         clipAmmo = weponStatus.get_maxClipAmmo();
-        muzlle = weponStatus.get_muzzle();
+        
     }
 
     public void WeponCtlr()
     {
         if (Input.GetMouseButton(0) && canShoot)
         {
+            //muzzle = weponStatus.get_muzzle();
+            muzzle = wepon[weponNumber].transform.Find("MuzzlePosi").gameObject;
 
-            GameObject bullet = Instantiate(weponStatus.get_bulletPrefab(), muzlle.transform.position, muzlle.transform.rotation);
+            GameObject bullet = Instantiate(weponStatus.get_bulletPrefab(), muzzle.transform.position, muzzle.transform.rotation);
 
             Vector3 force;
             force = gameObject.transform.forward * weponStatus.get_bulletSpeed();
