@@ -12,12 +12,6 @@ public class Player_ : MonoBehaviour
     private bool isGround;
  
 
-   //[SerializeField] private GameObject[] wepon;
-   //private int weponNumber;
-   //private int nowWeponNumber;
-   //[SerializeField] private Transform equipTransform;
-    
-
 
     [SerializeField] private GameObject cam;
     Quaternion camRot;
@@ -45,9 +39,6 @@ public class Player_ : MonoBehaviour
         camRot = cam.transform.localRotation;
         charaRot = transform.localRotation;
         isGround = false;
-       // weponNumber = 1;
-       // nowWeponNumber = 0;
-       // ChangeWepon(weponNumber);
     }
 
     public void PlayerCtrl()
@@ -79,34 +70,8 @@ public class Player_ : MonoBehaviour
         }
 
         transform.position += ((transform.forward * move.z) + (transform.right * move.x)) * speed * Time.deltaTime;
-
-
-        //ïêäÌÉ`ÉFÉì
-       // if (Input.GetKeyDown("1"))
-       // {
-       //     weponNumber = 1;
-       //     ChangeWepon(weponNumber);
-       // }
-       // if (Input.GetKeyDown("2"))
-       // {
-       //     weponNumber = 2;
-       //     ChangeWepon(weponNumber);
-       // }
     }
 
-
-  // public void ChangeWepon(int valu)
-  // {
-  //     if (nowWeponNumber!=0)
-  //     {
-  //         Destroy(equipTransform.GetChild(0).gameObject);
-  //     }
-  //
-  //     GameObject NowWepon;
-  //     NowWepon = Instantiate(wepon[valu], equipTransform.transform.position, equipTransform.transform.rotation, equipTransform);
-  //     nowWeponNumber = valu;
-  //     
-  // }
 
     public void CamCtrl()
     {
