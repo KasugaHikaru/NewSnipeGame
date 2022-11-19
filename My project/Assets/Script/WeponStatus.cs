@@ -28,7 +28,10 @@ public class WeponStatus : MonoBehaviour
     {
         return shootType;
     }
-
+    public int get_damage()
+    {
+        return damage;
+    }
     public GameObject get_bulletPrefab()
     {
         return bulletPrefab;

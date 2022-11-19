@@ -708,9 +708,10 @@ GameObject:
   - component: {fileID: 1446429013}
   - component: {fileID: 1446429012}
   - component: {fileID: 1446429011}
+  - component: {fileID: 1446429016}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -809,6 +810,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1446429016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446429010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f76df9530ef2e64c801326c30ef7cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 20
 --- !u!1 &1497277730
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,9 +867,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc975649bfda72843b991432752b2bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootRateNum: 0
-  clipAmmo: 0
-  muzzle: {fileID: 0}
   wepon:
   - {fileID: 0}
   - {fileID: 746124240919057229, guid: 81c86a48778e6694a9fe74197f41aaba, type: 3}
@@ -969,7 +980,7 @@ GameObject:
   - component: {fileID: 1698606623}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -7,12 +7,6 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private int maxHp;
     private int hp;
-    [SerializeField] private float deadWaitTime = 3;
-    private bool isDead;
-
-    CapsuleCollider capsuleCollider;
-    Animator animator;
-
 
     // Start is called before the first frame update
     void Start()
@@ -23,10 +17,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDead)
-        {
-            return;
-        }
 
     }
 
@@ -50,8 +40,7 @@ public class Enemy : MonoBehaviour
 
     public void Dead()
     {
-        isDead = true;
-        capsuleCollider.enabled = false;
+        Destroy(this);
     }
 
 }

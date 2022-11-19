@@ -11,13 +11,10 @@ public class Player_ : MonoBehaviour
     [SerializeField] private float jumpPower = 1.0f;
     private bool isGround;
  
-
-
     [SerializeField] private GameObject cam;
     Quaternion camRot;
     private float angleMinX = -90.0f;
     private float angleMaxX =  70.0f;
-
 
     private bool cursorLock = false;
 

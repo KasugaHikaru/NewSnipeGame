@@ -9,7 +9,7 @@ public class Wepon_ : MonoBehaviour
 
     private WeponStatus weponStatus;
 
-    private float  shootRateNum = 0.0f;         //発射レート確認用の変数   
+    private float  shootRateNum = 0.0f;                      //発射レート確認用の変数   
     private int[]  clipAmmo= { -1,-1,-1};                    //マガジン内の弾薬数
     private bool   canShoot;
 
@@ -18,8 +18,7 @@ public class Wepon_ : MonoBehaviour
     private int weponNumber;
     private int nowWeponNumber;
 
-
-    // Start is called before the first frame update
+     // Start is called before the first frame update
     void Start()
     {
         Init();
@@ -89,6 +88,7 @@ public class Wepon_ : MonoBehaviour
         Vector3 force;
         force = NowWepon.transform.forward * weponStatus.get_bulletSpeed();
         bullet.GetComponent<Rigidbody>().AddForce(force);
+        
 
         //弾、フラグなどの後処理
         Destroy(bullet, 3.0f);
@@ -145,5 +145,9 @@ public class Wepon_ : MonoBehaviour
         }
     }
 
+    public int get_damage()
+    {
+        return weponStatus.get_damage();
+    }
 
 }
