@@ -31,7 +31,9 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
+
         hp -= value;
+
         if (hp <= 0)
         {
             Dead();
@@ -40,7 +42,7 @@ public class Enemy : MonoBehaviour
 
     public void Dead()
     {
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
 }

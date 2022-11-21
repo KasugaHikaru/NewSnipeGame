@@ -18,7 +18,14 @@ public class Wepon_ : MonoBehaviour
     private int weponNumber;
     private int nowWeponNumber;
 
-     // Start is called before the first frame update
+    private GameObject bulletPrefab;
+    private int   damage;
+    private float bulletSpeed;
+    private float shootRate;
+    private int   maxClipAmmo;
+    private bool  shootType;
+
+    // Start is called before the first frame update
     void Start()
     {
         Init();
@@ -42,14 +49,14 @@ public class Wepon_ : MonoBehaviour
     public void WeponCtlr()
     {
         //射撃
-        if(!weponStatus.get_shootType())                   //単発
+        if(!shootType)                   //単発
         {
             if (Input.GetMouseButtonDown(0) && canShoot)
             {
                 Shoot();
             }
         }
-        else if (weponStatus.get_shootType())              //連射
+        else if (shootType)              //連射
         {
             if (Input.GetMouseButton(0) && canShoot)
             {
@@ -82,13 +89,13 @@ public class Wepon_ : MonoBehaviour
     public void Shoot()
     {
         //弾の生成
-        GameObject bullet = Instantiate(weponStatus.get_bulletPrefab(), muzzle.transform.position, muzzle.transform.rotation);
+        GameObject bullet = Instantiate(bulletPrefab, muzzle.transform.position, muzzle.transform.rotation);
+
 
         //弾の方向、ベクトル
         Vector3 force;
-        force = NowWepon.transform.forward * weponStatus.get_bulletSpeed();
+        force = NowWepon.transform.forward * bulletSpeed;
         bullet.GetComponent<Rigidbody>().AddForce(force);
-        
 
         //弾、フラグなどの後処理
         Destroy(bullet, 3.0f);
@@ -99,7 +106,7 @@ public class Wepon_ : MonoBehaviour
 
     public void Reload()
     {
-        clipAmmo[nowWeponNumber] = weponStatus.get_maxClipAmmo();
+        clipAmmo[nowWeponNumber] = maxClipAmmo;
     }
 
     public void ChangeWepon(int valu)
@@ -115,27 +122,39 @@ public class Wepon_ : MonoBehaviour
         nowWeponNumber = valu;
         weponStatus = wepon[valu].GetComponent<WeponStatus>();      //WeponStatusクラスから武器ステータスの情報を取得
 
-        //その武器を初めて生成する場合の初期設定
+        ChangeWeponInit();
+
+
+    }
+
+    public void ChangeWeponInit()
+    {
+        bulletPrefab = weponStatus.get_bulletPrefab();
+        damage       = weponStatus.get_damage();
+        bulletSpeed  = weponStatus.get_bulletSpeed();
+        shootRate    = weponStatus.get_shootRate();
+        maxClipAmmo  = weponStatus.get_maxClipAmmo();
+        shootType    = weponStatus.get_shootType();
+
+        muzzle = NowWepon.transform.Find("MuzzlePosi").gameObject;
+        shootRateNum = shootRate;
+
         if (clipAmmo[nowWeponNumber] == -1)
         {
-            clipAmmo[nowWeponNumber] = weponStatus.get_maxClipAmmo();
+            clipAmmo[nowWeponNumber] = maxClipAmmo;
         }
 
-        //弾を出すMuzzleの位置を取得
-        muzzle = NowWepon.transform.Find("MuzzlePosi").gameObject;
-
-        shootRateNum = weponStatus.get_shootRate();
     }
 
     public void CanShoot()
     {
         //射撃レート,canShot管理
-        if (shootRateNum < weponStatus.get_shootRate())
+        if (shootRateNum < shootRate)
         {
             shootRateNum++;
         }
 
-        if (shootRateNum == weponStatus.get_shootRate() && clipAmmo[nowWeponNumber] > 0)
+        if (shootRateNum == shootRate && clipAmmo[nowWeponNumber] > 0)
         {    
              canShoot = true;
         }
@@ -147,7 +166,7 @@ public class Wepon_ : MonoBehaviour
 
     public int get_damage()
     {
-        return weponStatus.get_damage();
+        return damage;
     }
 
 }

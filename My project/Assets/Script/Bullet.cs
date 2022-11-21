@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    Wepon_ wepon;
+   private GameObject wepon;
+   private int damage;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        wepon= GameObject.Find("WeponCtrl");
+        damage = wepon.GetComponent<Wepon_>().get_damage();
     }
 
     // Update is called once per frame
@@ -18,12 +20,11 @@ public class Bullet : MonoBehaviour
         
     }
 
-    public void OnControllerColliderHit(ControllerColliderHit hit)
+    public void OnTriggerEnter(Collider other)
     {
-        if (hit.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            Enemy enemy = hit.gameObject.GetComponent<Enemy>();
-            enemy.Damage(wepon.get_damage());
+            other.gameObject.GetComponent<Enemy>().Damage(damage);
         }
     }
 
