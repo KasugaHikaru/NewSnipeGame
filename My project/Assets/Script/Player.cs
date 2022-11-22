@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_ : MonoBehaviour
+public class Player : MonoBehaviour
 { 
     Quaternion charaRot;
     Rigidbody rb;

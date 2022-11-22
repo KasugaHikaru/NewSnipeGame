@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         wepon= GameObject.Find("WeponCtrl");
-        damage = wepon.GetComponent<Wepon_>().get_damage();
+        damage = wepon.GetComponent<Wepon>().get_damage();
     }
 
     // Update is called once per frame
@@ -24,6 +24,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            Destroy(this.gameObject);
             other.gameObject.GetComponent<Enemy>().Damage(damage);
         }
     }

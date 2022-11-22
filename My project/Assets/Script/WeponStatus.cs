@@ -11,6 +11,7 @@ public class WeponStatus : MonoBehaviour
     [SerializeField] private float shootRate;           //発射レート   
     [SerializeField] private int   maxClipAmmo;         //最大のマガジン内の弾薬数 
     [SerializeField] private bool  shootType;           //射撃タイプ(1が単発、0がフルオート)
+    [SerializeField] private float zoomFVO;
 
     public float get_bulletSpeed()
     {
@@ -32,6 +33,12 @@ public class WeponStatus : MonoBehaviour
     {
         return damage;
     }
+
+    public float get_zoomFVO()
+    {
+        return zoomFVO;
+    }
+
     public GameObject get_bulletPrefab()
     {
         return bulletPrefab;

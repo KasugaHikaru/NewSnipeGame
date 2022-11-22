@@ -639,6 +639,7 @@ MonoBehaviour:
   shootRate: 20
   maxClipAmmo: 35
   shootType: 1
+  zoomFVO: 50
 --- !u!1 &7287000783492341220
 GameObject:
   m_ObjectHideFlags: 0
