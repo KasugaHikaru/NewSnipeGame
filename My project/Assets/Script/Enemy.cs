@@ -14,10 +14,12 @@ public class Enemy : MonoBehaviour
     STATE state;
         
     private GameObject target;
+    NavMeshAgent agent;
+
     [SerializeField] private int maxHp;
     private int hp;
     [SerializeField] private float speed;
-    NavMeshAgent agent;
+    [SerializeField] private float attckRange;
 
     // Start is called before the first frame update
     void Start()
@@ -34,23 +36,41 @@ public class Enemy : MonoBehaviour
     public void Init()
     {
         hp = maxHp;
-        target = GameObject.Find("Player");
+        state = STATE.Move;
+        //aget
         agent = GetComponent<NavMeshAgent>();
+        target = GameObject.Find("Player");
+        agent.SetDestination(target.transform.position);
+        agent.speed = speed;
+
     }
 
     public void EnemyMove()
     {
+        StateSwith();
         if (state == STATE.Move)
         {
+            agent.SetDestination(target.transform.position);
 
         }
         else if (state == STATE.Attack)
         {
-
+            agent.Stop();
         }
-        agent.destination = target.transform.position;
-        //transform.LookAt(target.transform);
-        //transform.position += transform.forward * speed * Time.deltaTime;
+        
+    }
+
+    public void StateSwith()
+    {
+        float dis = Vector3.Distance(target.transform.position, transform.position);
+        if (dis > attckRange)
+        {
+            state = STATE.Move;
+        }
+        else if (dis <= attckRange)
+        {
+            state = STATE.Attack;
+        }
     }
 
     public void Damage(int value)

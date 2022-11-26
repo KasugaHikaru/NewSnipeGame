@@ -359,7 +359,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &294269498
 Transform:
@@ -488,7 +488,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &727083651
 Transform:
@@ -585,7 +585,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &896822207
 Transform:
@@ -773,7 +773,7 @@ GameObject:
   m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &944040702
 Transform:
@@ -910,7 +910,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1430991888
 Transform:
@@ -1026,7 +1026,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &1446429012
 BoxCollider:
@@ -1119,7 +1119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 20
-  speed: 0
+  speed: 3
+  attckRange: 0
 --- !u!195 &1446429017
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1134,7 +1135,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 3
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1183,7 +1184,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1497277730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc975649bfda72843b991432752b2bce, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b4951c9079d0f34291cf246c1c0f9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 64161403}
@@ -1436,7 +1437,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1982264300
 Transform:

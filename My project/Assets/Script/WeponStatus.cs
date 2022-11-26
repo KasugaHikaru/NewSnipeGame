@@ -33,12 +33,10 @@ public class WeponStatus : MonoBehaviour
     {
         return damage;
     }
-
     public float get_zoomFVO()
     {
         return zoomFVO;
     }
-
     public GameObject get_bulletPrefab()
     {
         return bulletPrefab;
