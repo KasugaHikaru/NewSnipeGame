@@ -7,19 +7,31 @@ public class Enemy : MonoBehaviour
 {
     enum STATE
     {
-        Move,
+        Trail,
         Attack,
     }
 
     STATE state;
-        
-    private GameObject target;
-    NavMeshAgent agent;
 
-    [SerializeField] private int maxHp;
-    private int hp;
+    private GameObject   target;
+    private NavMeshAgent agent;
+    private Vector3      destination;
+
+    [SerializeField] private int   maxHp;
+                     private int   hp;
+    [SerializeField] private int   damage;
+    [SerializeField] private float knockBackPower;
+   // [SerializeField] private float attackRate;
+   //                  private float attackRateNum;
     [SerializeField] private float speed;
-    [SerializeField] private float attckRange;
+    [SerializeField] private float attackSpeed;
+    [SerializeField] private float attackRange;
+    [SerializeField] private float attackDistance;
+    [SerializeField] private int   startAttackGapTime;
+    [SerializeField] private int   finishAttackGapTime;
+
+    private bool isSwithState;
+    private Vector3 numPosi;
 
     // Start is called before the first frame update
     void Start()
@@ -31,46 +43,97 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         EnemyMove();
+        Debug.Log("敵位置："+transform.position);
+        Debug.Log("ゴール位置：" + agent.destination);
     }
 
     public void Init()
     {
         hp = maxHp;
-        state = STATE.Move;
+        state = STATE.Trail;
         //aget
         agent = GetComponent<NavMeshAgent>();
         target = GameObject.Find("Player");
-        agent.SetDestination(target.transform.position);
+        destination = target.transform.position;
+        agent.SetDestination(destination);
         agent.speed = speed;
+        isSwithState = true;
 
     }
 
     public void EnemyMove()
     {
-        StateSwith();
-        if (state == STATE.Move)
-        {
-            agent.SetDestination(target.transform.position);
 
+        if (isSwithState)
+        {
+            SwithState();
+        }
+
+        if (state == STATE.Trail)
+        {
+            Trail();
         }
         else if (state == STATE.Attack)
         {
-            agent.Stop();
+            Attack();   
         }
-        
+
     }
 
-    public void StateSwith()
+    public void SwithState()
     {
-        float dis = Vector3.Distance(target.transform.position, transform.position);
-        if (dis > attckRange)
+        float dis = Vector3.Distance(transform.position, destination);
+
+        if (dis > attackRange)
         {
-            state = STATE.Move;
+            state = STATE.Trail;
         }
-        else if (dis <= attckRange)
+        else if (dis <= attackRange) 
         {
             state = STATE.Attack;
         }
+    }
+
+    public void Trail()
+    {
+        agent.speed = speed;
+        targetSet();
+    }
+
+    public void Attack()
+    {
+        if (isSwithState)
+        {
+            numPosi = transform.position;
+        }
+
+        isSwithState = false;
+        agent.speed = attackSpeed;
+
+        Vector3 a;
+        a.x = attackDistance * Mathf.Sin(transform.rotation.y) - transform.position.x;
+        a.z = attackDistance * Mathf.Cos(transform.rotation.y) - transform.position.z;
+        a.y = 0.0f;
+
+        agent.destination = a;
+
+        if (transform.position == agent.destination)
+        {
+            isSwithState = true;
+            targetSet();
+        }
+
+        //if (Vector3.Distance(numPosi, transform.position) > attackDistance)
+        //{
+        //    isSwithState = true;
+        //    targetSet();
+        //}
+    }
+
+    public void targetSet()
+    {
+        destination = target.transform.position;
+        agent.SetDestination(destination);
     }
 
     public void Damage(int value)
