@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        wepon= GameObject.Find("WeponCtrl");
+        wepon  = GameObject.Find("WeponCtrl");
         damage = wepon.GetComponent<Wepon>().get_damage();
     }
 

@@ -13,25 +13,24 @@ public class Enemy : MonoBehaviour
 
     STATE state;
 
+    private EnemyStatus enemyStatus;
+    [SerializeField] private Player player;
+
     private GameObject   target;
     private NavMeshAgent agent;
     private Vector3      destination;
 
-    [SerializeField] private int   maxHp;
-                     private int   hp;
-    [SerializeField] private int   damage;
-    [SerializeField] private float knockBackPower;
-   // [SerializeField] private float attackRate;
-   //                  private float attackRateNum;
-    [SerializeField] private float speed;
+    private int   hp;
+    private int   maxHp;
+    private int   damage;
+    private float knockBackPower;
+    private float attackRange;
+    private float speed;
+    // [SerializeField] private float attackRate;
+    //                  private float attackRateNum;
     [SerializeField] private float attackSpeed;
-    [SerializeField] private float attackRange;
-    [SerializeField] private float attackDistance;
-    [SerializeField] private int   startAttackGapTime;
-    [SerializeField] private int   finishAttackGapTime;
+    private bool hitPlayer;
 
-    private bool isSwithState;
-    private Vector3 numPosi;
 
     // Start is called before the first frame update
     void Start()
@@ -43,12 +42,17 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         EnemyMove();
-        Debug.Log("敵位置："+transform.position);
-        Debug.Log("ゴール位置：" + agent.destination);
     }
 
     public void Init()
     {
+        enemyStatus    = GetComponent<EnemyStatus>();
+        maxHp          = enemyStatus.get_maxHp();
+        speed          = enemyStatus.get_speed();
+        damage         = enemyStatus.get_damage();
+        knockBackPower = enemyStatus.get_knockBackPower();
+        attackRange    = enemyStatus.get_attackRange();
+
         hp = maxHp;
         state = STATE.Trail;
         //aget
@@ -57,17 +61,14 @@ public class Enemy : MonoBehaviour
         destination = target.transform.position;
         agent.SetDestination(destination);
         agent.speed = speed;
-        isSwithState = true;
+        hitPlayer = false;
 
     }
 
     public void EnemyMove()
     {
 
-        if (isSwithState)
-        {
-            SwithState();
-        }
+        SwithState();
 
         if (state == STATE.Trail)
         {
@@ -102,32 +103,13 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        if (isSwithState)
-        {
-            numPosi = transform.position;
-        }
-
-        isSwithState = false;
         agent.speed = attackSpeed;
-
-        Vector3 a;
-        a.x = attackDistance * Mathf.Sin(transform.rotation.y) - transform.position.x;
-        a.z = attackDistance * Mathf.Cos(transform.rotation.y) - transform.position.z;
-        a.y = 0.0f;
-
-        agent.destination = a;
-
-        if (transform.position == agent.destination)
+        //agent.ResetPath();
+        if (hitPlayer)
         {
-            isSwithState = true;
-            targetSet();
+            player.Damage(damage);
         }
-
-        //if (Vector3.Distance(numPosi, transform.position) > attackDistance)
-        //{
-        //    isSwithState = true;
-        //    targetSet();
-        //}
+        targetSet();
     }
 
     public void targetSet()
@@ -136,8 +118,27 @@ public class Enemy : MonoBehaviour
         agent.SetDestination(destination);
     }
 
+
+    private void OnCollisionEnter(Collision collision)                //地面との当たり判定
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            hitPlayer = true;
+            //collision.gameObject.GetComponent<Player>().Damage(damage);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            hitPlayer = false;
+        }
+    }
+
     public void Damage(int value)
     {
+
         if (value <= 0)
         {
             return;

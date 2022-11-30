@@ -6,11 +6,15 @@ public class Player : MonoBehaviour
 { 
     Quaternion charaRot;
     Rigidbody rb;
-    [SerializeField] private float speed=2f;
-    [SerializeField] private float sensityvity = 1.0f;
-    [SerializeField] private float jumpPower = 1.0f;
+
+    [SerializeField] private int   maxHp;
+                     private int   hp;
+    [SerializeField] private float speed;
+    [SerializeField] private float sensityvity;
+    [SerializeField] private float jumpPower;
     private bool isGround;
- 
+    private bool isDead;
+
     [SerializeField] private GameObject cam;
     Quaternion camRot;
     private float angleMinX = -90.0f;
@@ -25,17 +29,22 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        PlayerCtrl();
-        CamCtrl();
-        UpdataCursorLock();
+        if (!isDead)
+        {
+            PlayerCtrl();
+            CamCtrl();
+            UpdataCursorLock();
+        }
     }
 
     public void Init()
     {
+        hp = maxHp;
         rb = GetComponent<Rigidbody>();
         camRot = cam.transform.localRotation;
         charaRot = transform.localRotation;
         isGround = false;
+        isDead   = false;
     }
 
     public void PlayerCtrl()
@@ -130,4 +139,29 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
     }
+
+    public void Damage(int value)
+    {
+
+        if (value <= 0)
+        {
+            return;
+        }
+
+        hp -= value;
+
+        if (hp <= 0)
+        {
+            Dead();
+        }
+    }
+
+    public void Dead()
+    {
+        isDead = true;
+        GetComponent<CapsuleCollider>().enabled = false;
+        //Destroy(this.gameObject);
+    }
+
+
 }

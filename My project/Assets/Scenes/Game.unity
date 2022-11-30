@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 220498021}
   m_Layer: 0
   m_Name: PlayerCtrl
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -242,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217103cf375b2824cbe2bf320fb8eb32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 100
   speed: 5
   sensityvity: 1
   jumpPower: 5
@@ -1103,8 +1104,9 @@ GameObject:
   - component: {fileID: 1446429013}
   - component: {fileID: 1446429012}
   - component: {fileID: 1446429011}
-  - component: {fileID: 1446429016}
   - component: {fileID: 1446429017}
+  - component: {fileID: 1446429016}
+  - component: {fileID: 1446429018}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -1218,15 +1220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f76df9530ef2e64c801326c30ef7cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 20
-  damage: 0
-  knockBackPower: 0
-  speed: 3
+  player: {fileID: 220498021}
   attackSpeed: 7
-  attackRange: 5
-  attackDistance: 7
-  startAttackGapTime: 1
-  finishAttackGapTime: 1
 --- !u!195 &1446429017
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1249,6 +1244,23 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1446429018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446429010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05cb9cfbfa885194696c2068c59a9df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 20
+  damage: 5
+  knockBackPower: 1
+  attackRange: 5
+  speed: 3
 --- !u!1 &1497277730
 GameObject:
   m_ObjectHideFlags: 0
