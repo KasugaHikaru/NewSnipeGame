@@ -39,7 +39,7 @@ public class Wepon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        WeponCtlr();
+       //WeponCtlr();
     }
 
     public void Init()
@@ -120,12 +120,10 @@ public class Wepon : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            //cam.fieldOfView = zoomFOV;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, zoomFOV, Time.deltaTime / zoomSpeed);
         }
         if (!Input.GetMouseButton(1))
         {
-            //cam.fieldOfView = defaultFOV;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, defaultFOV, Time.deltaTime / zoomSpeed);
         }
     }

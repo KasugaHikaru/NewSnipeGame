@@ -19,8 +19,9 @@ public class Player : MonoBehaviour
     Quaternion camRot;
     private float angleMinX = -90.0f;
     private float angleMaxX =  70.0f;
-
     private bool cursorLock = false;
+
+    private Wepon wepon;
 
     void Start()
     {
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(hp);
         if (!isDead)
         {
             PlayerCtrl();
@@ -41,6 +43,7 @@ public class Player : MonoBehaviour
     {
         hp = maxHp;
         rb = GetComponent<Rigidbody>();
+        wepon= GetComponent<Wepon>();
         camRot = cam.transform.localRotation;
         charaRot = transform.localRotation;
         isGround = false;
@@ -69,13 +72,16 @@ public class Player : MonoBehaviour
             move.x += 1;
         }
 
+        transform.position += ((transform.forward * move.z) + (transform.right * move.x)) * speed * Time.deltaTime;
+
+        //ƒWƒƒƒ“ƒv
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
             isGround = false;
             rb.velocity = Vector3.up * jumpPower;
         }
 
-        transform.position += ((transform.forward * move.z) + (transform.right * move.x)) * speed * Time.deltaTime;
+        wepon.WeponCtlr(); 
     }
 
 

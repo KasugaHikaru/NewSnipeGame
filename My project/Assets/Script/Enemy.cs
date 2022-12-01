@@ -14,7 +14,6 @@ public class Enemy : MonoBehaviour
     STATE state;
 
     private EnemyStatus enemyStatus;
-    [SerializeField] private Player player;
 
     private GameObject   target;
     private NavMeshAgent agent;
@@ -26,11 +25,13 @@ public class Enemy : MonoBehaviour
     private float knockBackPower;
     private float attackRange;
     private float speed;
-    // [SerializeField] private float attackRate;
-    //                  private float attackRateNum;
     [SerializeField] private float attackSpeed;
+    [SerializeField] private float attackDistance;
+    [SerializeField] private float attackTime;
+    private float numAttackTime;
     private bool hitPlayer;
-
+    private bool swithState;
+    private Vector3 attackStartPosi;
 
     // Start is called before the first frame update
     void Start()
@@ -62,13 +63,15 @@ public class Enemy : MonoBehaviour
         agent.SetDestination(destination);
         agent.speed = speed;
         hitPlayer = false;
-
-    }
+        swithState = true;
+}
 
     public void EnemyMove()
     {
-
-        SwithState();
+        if (swithState)
+        {
+            SwithState();
+        }
 
         if (state == STATE.Trail)
         {
@@ -103,13 +106,24 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        agent.speed = attackSpeed;
-        //agent.ResetPath();
-        if (hitPlayer)
+        if (swithState)
         {
-            player.Damage(damage);
+            attackStartPosi = transform.position;
+            agent.ResetPath();
+            numAttackTime = 0;
         }
-        targetSet();
+
+        swithState = false;
+        transform.position += (transform.forward).normalized * attackSpeed;
+        numAttackTime += Time.deltaTime;
+
+        if ((Vector3.Distance(transform.position, attackStartPosi) >= attackDistance) || numAttackTime >= attackTime)  
+        {
+            hitPlayer = false;
+            swithState = true;
+            numAttackTime = 0;
+            targetSet();
+        }
     }
 
     public void targetSet()
@@ -119,20 +133,18 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)                //’n–Ê‚Æ‚Ì“–‚½‚è”»’è
+    private void OnCollisionEnter(Collision collision)                
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            hitPlayer = true;
-            //collision.gameObject.GetComponent<Player>().Damage(damage);
-        }
-    }
+            if (!hitPlayer)
+            {
+                hitPlayer = true;
+                collision.gameObject.GetComponent<Player>().Damage(damage);
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            hitPlayer = false;
+                Vector3 knockBackVectol = (collision.transform.position - transform.position).normalized;
+                collision.rigidbody.AddForce(knockBackVectol * knockBackPower, ForceMode.VelocityChange);
+            }
         }
     }
 
