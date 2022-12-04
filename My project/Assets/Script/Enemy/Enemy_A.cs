@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy_A : MonoBehaviour
 {
     enum STATE
     {
@@ -19,7 +19,6 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent agent;
     private Vector3      destination;
 
-    private int   hp;
     private int   maxHp;
     private int   damage;
     private float knockBackPower;
@@ -53,8 +52,7 @@ public class Enemy : MonoBehaviour
         damage         = enemyStatus.get_damage();
         knockBackPower = enemyStatus.get_knockBackPower();
         attackRange    = enemyStatus.get_attackRange();
-
-        hp = maxHp;
+   
         state = STATE.Trail;
         //aget
         agent = GetComponent<NavMeshAgent>();
@@ -146,27 +144,6 @@ public class Enemy : MonoBehaviour
                 collision.rigidbody.AddForce(knockBackVectol * knockBackPower, ForceMode.VelocityChange);
             }
         }
-    }
-
-    public void Damage(int value)
-    {
-
-        if (value <= 0)
-        {
-            return;
-        }
-
-        hp -= value;
-
-        if (hp <= 0)
-        {
-            Dead();
-        }
-    }
-
-    public void Dead()
-    {
-        Destroy(this.gameObject);
     }
 
 }
