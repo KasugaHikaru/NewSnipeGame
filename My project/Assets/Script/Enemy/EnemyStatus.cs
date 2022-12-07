@@ -5,17 +5,12 @@ using UnityEngine;
 public class EnemyStatus : MonoBehaviour
 {
 
-    [SerializeField] 
-    private int maxHp;
+    [SerializeField] private int maxHp;
     private int hp;
-    [SerializeField] 
-    private int damage;
-    [SerializeField]
-    private float knockBackPower;
-    [SerializeField] 
-    private float attackRange;
-    [SerializeField] 
-    private float speed;
+    [SerializeField] private int damage;
+    [SerializeField] private float knockBackPower;
+    [SerializeField] private float attackRange;
+    [SerializeField] private float speed;
 
     void Start()
     {
@@ -64,4 +59,5 @@ public class EnemyStatus : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+
 }

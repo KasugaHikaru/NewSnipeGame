@@ -103,7 +103,6 @@ public class Wepon : MonoBehaviour
         //弾の生成
         GameObject bullet = Instantiate(bulletPrefab, muzzle.transform.position, muzzle.transform.rotation);
 
-
         //弾の方向、ベクトル
         Vector3 force;
         force = NowWepon.transform.forward * bulletSpeed;

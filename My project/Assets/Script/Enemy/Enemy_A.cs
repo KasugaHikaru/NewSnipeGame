@@ -47,7 +47,6 @@ public class Enemy_A : MonoBehaviour
     public void Init()
     {
         enemyStatus    = GetComponent<EnemyStatus>();
-        maxHp          = enemyStatus.get_maxHp();
         speed          = enemyStatus.get_speed();
         damage         = enemyStatus.get_damage();
         knockBackPower = enemyStatus.get_knockBackPower();
@@ -112,7 +111,7 @@ public class Enemy_A : MonoBehaviour
         }
 
         swithState = false;
-        transform.position += (transform.forward).normalized * attackSpeed;
+        transform.position += (transform.forward).normalized * attackSpeed * Time.deltaTime;
         numAttackTime += Time.deltaTime;
 
         if ((Vector3.Distance(transform.position, attackStartPosi) >= attackDistance) || numAttackTime >= attackTime)  
@@ -133,15 +132,18 @@ public class Enemy_A : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)                
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (state == STATE.Attack)
         {
-            if (!hitPlayer)
+            if (collision.gameObject.CompareTag("Player"))
             {
-                hitPlayer = true;
-                collision.gameObject.GetComponent<Player>().Damage(damage);
+                if (!hitPlayer)
+                {
+                    hitPlayer = true;
+                    collision.gameObject.GetComponent<Player>().Damage(damage);
 
-                Vector3 knockBackVectol = (collision.transform.position - transform.position).normalized;
-                collision.rigidbody.AddForce(knockBackVectol * knockBackPower, ForceMode.VelocityChange);
+                    Vector3 knockBackVectol = (collision.transform.position - transform.position).normalized;
+                    collision.rigidbody.AddForce(knockBackVectol * knockBackPower, ForceMode.VelocityChange);
+                }
             }
         }
     }
