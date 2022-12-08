@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
 
     private Wepon wepon;
 
+
     void Start()
     {
         Init();
@@ -80,6 +81,9 @@ public class Player : MonoBehaviour
             isGround = false;
             rb.velocity = Vector3.up * jumpPower;
         }
+
+        //ŽËŒ‚
+
 
         wepon.WeponCtlr(); 
     }

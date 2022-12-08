@@ -111,5 +111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerDamage: 5
-  EnemyDamage: 0
-  knockBackPower: 0
+  EnemyDamage: 5
+  knockBackPower: 10
+  duration: 0.75

@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-   private GameObject wepon;
-   private int damage;
+
+    private Transform wepon;
+    private int damage;
 
     // Start is called before the first frame update
     void Start()
     {
-        wepon  = GameObject.Find("PlayerCtrl");
-        damage = wepon.GetComponent<Wepon>().get_damage();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        wepon  = GameObject.Find("Equip").transform.GetChild(0);
+        damage = wepon.GetComponent<WeponStatus>().get_damage();
     }
 
     public void OnTriggerEnter(Collider other)

@@ -7,6 +7,7 @@ public class Bom : MonoBehaviour
     [SerializeField] private int PlayerDamage;
     [SerializeField] private int EnemyDamage;
     [SerializeField] private float knockBackPower;
+    [SerializeField] private float duration;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class Bom : MonoBehaviour
     {
         
     }
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
@@ -31,6 +33,14 @@ public class Bom : MonoBehaviour
             other.gameObject.GetComponent<Player>().Damage(PlayerDamage);
         }
 
-        
+        Vector3 knockBackVectol = (other.transform.position - transform.position).normalized;
+        other.gameObject.GetComponent<Rigidbody>().AddForce(knockBackVectol * knockBackPower, ForceMode.VelocityChange);
+
+        Invoke("Finish", duration);
+    }
+
+    public void Finish()
+    {
+        Destroy(this.gameObject);
     }
 }

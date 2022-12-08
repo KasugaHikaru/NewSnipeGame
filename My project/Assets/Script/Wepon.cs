@@ -58,14 +58,14 @@ public class Wepon : MonoBehaviour
         //射撃
         if(!shootType)                   //単発
         {
-            if (Input.GetMouseButtonDown(0) && canShoot)
+            if (Input.GetMouseButtonDown(0))
             {
                 Shoot();
             }
         }
         else if (shootType)              //連射
         {
-            if (Input.GetMouseButton(0) && canShoot)
+            if (Input.GetMouseButton(0))
             {
                 Shoot();
             }
@@ -100,19 +100,22 @@ public class Wepon : MonoBehaviour
 
     public void Shoot()
     {
-        //弾の生成
-        GameObject bullet = Instantiate(bulletPrefab, muzzle.transform.position, muzzle.transform.rotation);
+        if (canShoot)
+        {
+            //弾の生成
+            GameObject bullet = Instantiate(bulletPrefab, muzzle.transform.position, muzzle.transform.rotation);
 
-        //弾の方向、ベクトル
-        Vector3 force;
-        force = NowWepon.transform.forward * bulletSpeed;
-        bullet.GetComponent<Rigidbody>().AddForce(force);
+            //弾の方向、ベクトル
+            Vector3 force;
+            force = NowWepon.transform.forward * bulletSpeed;
+            bullet.GetComponent<Rigidbody>().AddForce(force);
 
-        //弾、フラグなどの後処理
-        Destroy(bullet, 3.0f);
-        canShoot = false;
-        shootRateNum = 0;
-        clipAmmo[weponNumber]--;
+            //弾、フラグなどの後処理
+            Destroy(bullet, 3.0f);
+            canShoot = false;
+            shootRateNum = 0;
+            clipAmmo[weponNumber]--;
+        }
     }
 
     public void ADS()
@@ -146,8 +149,6 @@ public class Wepon : MonoBehaviour
         weponStatus = wepon[valu].GetComponent<WeponStatus>();      //WeponStatusクラスから武器ステータスの情報を取得
 
         ChangeWeponInit();
-
-
     }
 
     public void ChangeWeponInit()
@@ -187,10 +188,4 @@ public class Wepon : MonoBehaviour
             canShoot = false;
         }
     }
-
-    public int get_damage()
-    {
-        return damage;
-    }
-
 }
