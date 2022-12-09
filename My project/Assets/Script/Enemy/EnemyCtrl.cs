@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EnemyCtrl : MonoBehaviour
 {
-    [SerializeField] private GameObject[] enemy; 
+    [SerializeField] private GameObject[] enemy;
+    [SerializeField] private GameObject[] enemySpornPosi;
+
     // Start is called before the first frame update
     void Start()
     {

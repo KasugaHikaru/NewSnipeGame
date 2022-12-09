@@ -23,18 +23,20 @@ public class Bom : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        Vector3 knockBackVectol = (other.transform.position - transform.position).normalized;
+
         if (other.gameObject.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<EnemyStatus>().Damage(EnemyDamage);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(knockBackVectol * knockBackPower, ForceMode.VelocityChange);
         }
 
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<Player>().Damage(PlayerDamage);
+            other.gameObject.GetComponent<Player>().Damage(PlayerDamage);      
+            other.gameObject.GetComponent<Rigidbody>().AddForce(knockBackVectol * knockBackPower, ForceMode.VelocityChange);
         }
 
-        Vector3 knockBackVectol = (other.transform.position - transform.position).normalized;
-        other.gameObject.GetComponent<Rigidbody>().AddForce(knockBackVectol * knockBackPower, ForceMode.VelocityChange);
 
         Invoke("Finish", duration);
     }
