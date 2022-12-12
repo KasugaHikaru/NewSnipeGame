@@ -644,17 +644,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98047543fd6b7de4aab2b737b88a3c15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weakEnemyValue: 0
-  strongEnemyValue: 0
+  initWeakEnemyValu: 2
+  initStrongEnemyValu: 2
+  initSpornPosiValu: 3
   allWeakEnemyList:
   - {fileID: 7526596012690735118, guid: fc05dfcd6e203784aad2117f60582796, type: 3}
-  allStrongEnemyList:
   - {fileID: 8689666195675767954, guid: e3bc1128187ca994787cd27295a06f29, type: 3}
+  - {fileID: 8035238891647859699, guid: bcc0a21eff1e8364b92e513d2db1db4b, type: 3}
+  allStrongEnemyList:
+  - {fileID: 7222225985040639172, guid: bb468f02f44dd8144877bc7980ebdde3, type: 3}
+  - {fileID: 5535153207087541532, guid: 50201fe102f45364dae7a5eaec85fddd, type: 3}
+  - {fileID: 1058403566412678075, guid: 45654375661877447aa61684ca3c672f, type: 3}
   allEnemySpornPosi:
   - {fileID: 150960438}
   - {fileID: 102498267}
   - {fileID: 607972996}
-  EnemySpornRate: 0
+  - {fileID: 1485665439}
+  - {fileID: 1859422081}
+  - {fileID: 1339479399}
+  EnemySpornRate: 1
+  fnishWave: 0
 --- !u!4 &179417289
 Transform:
   m_ObjectHideFlags: 0
@@ -1585,6 +1594,9 @@ Transform:
   - {fileID: 150960439}
   - {fileID: 102498268}
   - {fileID: 607972997}
+  - {fileID: 1485665440}
+  - {fileID: 1859422082}
+  - {fileID: 1339479400}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1594,7 +1606,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh41260
+  m_Name: pb_Mesh24156
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2358,6 +2370,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1339479399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1339479400}
+  m_Layer: 0
+  m_Name: EnemySporn (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1339479400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339479399}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -33.4, y: 0, z: -30.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 944040702}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1370825337
 Mesh:
   m_ObjectHideFlags: 0
@@ -2866,6 +2909,37 @@ Transform:
   m_Father: {fileID: 944040702}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1485665439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1485665440}
+  m_Layer: 0
+  m_Name: EnemySporn (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1485665440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485665439}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.7, y: 0, z: -30.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 944040702}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1524928059
 GameObject:
   m_ObjectHideFlags: 0
@@ -3093,6 +3167,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1829602218}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1859422081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1859422082}
+  m_Layer: 0
+  m_Name: EnemySporn (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1859422082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859422081}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35.9, y: 0, z: -30.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 944040702}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1937638063
 Mesh:
   m_ObjectHideFlags: 0
