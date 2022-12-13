@@ -169,7 +169,7 @@ public class Player : MonoBehaviour
     public void Dead()
     {
         isDead = true;
-        GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<Rigidbody>().constraints= RigidbodyConstraints.FreezeAll;
         //Destroy(this.gameObject);
     }
 

@@ -1430,7 +1430,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.73170733, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.79477715, b: 0.051886797, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -1775,7 +1775,6 @@ GameObject:
   - component: {fileID: 1092062243}
   - component: {fileID: 1092062246}
   - component: {fileID: 1092062245}
-  - component: {fileID: 1092062244}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
@@ -1799,19 +1798,6 @@ Transform:
   m_Father: {fileID: 64161404}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1092062244
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1092062242}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1092062245
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2951,7 +2937,6 @@ GameObject:
   - component: {fileID: 1524928060}
   - component: {fileID: 1524928063}
   - component: {fileID: 1524928062}
-  - component: {fileID: 1524928061}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -2974,19 +2959,6 @@ Transform:
   m_Father: {fileID: 64161404}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1524928061
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524928059}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1524928062
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3081,7 +3053,6 @@ GameObject:
   - component: {fileID: 1829602219}
   - component: {fileID: 1829602222}
   - component: {fileID: 1829602221}
-  - component: {fileID: 1829602220}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -3104,19 +3075,6 @@ Transform:
   m_Father: {fileID: 1698606623}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1829602220
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829602218}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1829602221
 MeshRenderer:
   m_ObjectHideFlags: 0
