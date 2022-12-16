@@ -89,7 +89,7 @@ public class Enemy_A : MonoBehaviour
         {
             state = STATE.Trail;
         }
-        else if (dis <= attackRange) 
+        else if (dis <= attackRange)
         {
             state = STATE.Attack;
         }

@@ -36,12 +36,6 @@ public class Wepon : MonoBehaviour
         Init();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       //WeponCtlr();
-    }
-
     public void Init()
     {
         zoomSpeed = 0.1f;

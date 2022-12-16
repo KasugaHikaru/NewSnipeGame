@@ -7,17 +7,17 @@ public class EnemyStatus : MonoBehaviour
 
     [SerializeField] private int maxHp;
     private int hp;
-    [SerializeField] private int damage;
+    [SerializeField] private int   damage;
     [SerializeField] private float knockBackPower;
     [SerializeField] private float attackRange;
     [SerializeField] private float speed;
+    [SerializeField] private int   dropMoney;
+    [SerializeField] private int   dropErement;
 
     void Start()
     {
         hp = maxHp;
     }
-
-
     public int get_maxHp()
     {
         return maxHp;
@@ -58,6 +58,7 @@ public class EnemyStatus : MonoBehaviour
     public void Dead()
     {
         Destroy(this.gameObject);
+        GameManager.
     }
 
 }
