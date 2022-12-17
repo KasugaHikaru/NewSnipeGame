@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    private static GameManager gameManager = null;
+    public static GameManager instance = null;
 
     public float time;
     public int   wave;
@@ -15,9 +15,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
 
-        if (gameManager == null)
+        if (instance == null)
         {
-            gameManager = this;
+            instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
         else
@@ -54,18 +54,18 @@ public class GameManager : MonoBehaviour
     {
         return money;
     }
-    public void set_money(int valu)
+    public void set_money(int value)
     {
-        money += valu;
+        money += value;
     }
     public int get_erement()
     {
         return erement;
     }
 
-    public void set_erement(int valu)
+    public void set_erement(int value)
     {
-        erement += valu;
+        erement += value;
     }
 
 }

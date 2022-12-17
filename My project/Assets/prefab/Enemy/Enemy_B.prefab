@@ -156,6 +156,8 @@ MonoBehaviour:
   knockBackPower: 0
   attackRange: 3
   speed: 5
+  dropMoney: 5
+  dropErement: 10
 --- !u!114 &8689666195675767961
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class EnemyStatus : MonoBehaviour
     [SerializeField] private int   dropMoney;
     [SerializeField] private int   dropErement;
 
+
     void Start()
     {
         hp = maxHp;
@@ -58,7 +59,8 @@ public class EnemyStatus : MonoBehaviour
     public void Dead()
     {
         Destroy(this.gameObject);
-        GameManager.
+        GameManager.instance.set_money(dropMoney);
+        GameManager.instance.set_erement(dropErement);
     }
 
 }

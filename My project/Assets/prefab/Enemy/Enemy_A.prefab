@@ -171,3 +171,5 @@ MonoBehaviour:
   knockBackPower: 7
   attackRange: 5
   speed: 5
+  dropMoney: 10
+  dropErement: 10

@@ -41,11 +41,11 @@ public class Enemy_B : MonoBehaviour
     public void Init()
     {
         enemyStatus = GetComponent<EnemyStatus>();
-        agent = GetComponent<NavMeshAgent>();
-        target = GameObject.Find("Player");
+        agent       = GetComponent<NavMeshAgent>();
+        target      = GameObject.Find("Player");
         agent.speed = enemyStatus.get_speed();
-        attackRange= enemyStatus.get_attackRange();
-        isAttack = false;
+        attackRange = enemyStatus.get_attackRange();
+        isAttack    = false;
     } 
 
     public void Move()
@@ -91,6 +91,6 @@ public class Enemy_B : MonoBehaviour
     public void Explosion()
     {
         GameObject bom = Instantiate(bomPrefab, transform.position, transform.rotation);
-        enemyStatus.Dead();
+        Destroy(this.gameObject);
     }
 }
