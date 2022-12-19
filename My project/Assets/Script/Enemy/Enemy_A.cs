@@ -141,7 +141,7 @@ public class Enemy_A : MonoBehaviour
                     hitPlayer = true;
                     collision.gameObject.GetComponent<Player>().Damage(damage);
 
-                    Vector3 knockBackVectol = (collision.transform.position - transform.position).normalized;
+                    Vector3 knockBackVectol = (collision.transform.position - transform.position + Vector3.up).normalized;
                     collision.rigidbody.AddForce(knockBackVectol * knockBackPower, ForceMode.VelocityChange);
                 }
             }

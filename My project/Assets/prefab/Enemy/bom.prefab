@@ -113,4 +113,4 @@ MonoBehaviour:
   PlayerDamage: 5
   EnemyDamage: 5
   knockBackPower: 10
-  duration: 0.75
+  duration: 1.2

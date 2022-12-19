@@ -23,7 +23,7 @@ public class Bom : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Vector3 knockBackVectol = (other.transform.position - transform.position).normalized;
+        Vector3 knockBackVectol = (other.transform.position - transform.position + Vector3.up).normalized;
 
         if (other.gameObject.CompareTag("Enemy"))
         {
