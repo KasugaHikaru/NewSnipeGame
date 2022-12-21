@@ -7,10 +7,15 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance = null;
 
-    public float time;
-    public int   wave;
-    public int   money;
-    public int   erement;
+    public  float time;
+    private float timeLimit;
+    public  bool startArea;
+    public  bool fnishArea;
+    public  int beforeMoney;
+    public  int beforeErement; 
+    public  int money;
+    public  int erement;
+
 
     private void Awake()
     {
@@ -36,6 +41,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
     }
 
     public void Init()
@@ -44,6 +50,22 @@ public class GameManager : MonoBehaviour
         wave    = 0;
         money   = 0;
         erement = 0;
+    }
+
+    public void StartArea()
+    {
+        beforeMoney = money;
+        beforeErement = erement;
+    }
+
+    public void FnishArea()
+    {
+
+    }
+
+    public void TimeUpdate()
+    {
+        time += Time.deltaTime;
     }
 
     public float get_time()
