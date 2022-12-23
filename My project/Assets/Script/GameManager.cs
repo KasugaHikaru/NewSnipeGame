@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     public  float time;
-    private float timeLimit;
+    [SerializeField] private float timeLimit;
     public  bool startArea;
     public  bool fnishArea;
     public  int beforeMoney;
@@ -47,18 +47,39 @@ public class GameManager : MonoBehaviour
     public void Init()
     {
         time    = 0;
-        wave    = 0;
         money   = 0;
         erement = 0;
     }
 
     public void StartArea()
     {
+        startArea = true;
+        time = 0;
         beforeMoney = money;
         beforeErement = erement;
     }
 
     public void FnishArea()
+    {
+
+    }
+
+
+    public void BattleArea()
+    {
+        TimeUpdate();
+        if (time >= timeLimit)
+        {
+            FnishArea();
+        }
+    }
+
+    public void ShopArea()
+    {
+
+    }
+
+    public void StrengthenArea()
     {
 
     }
