@@ -5,10 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Button : MonoBehaviour
 {
-
-    public void SceneChange()
+    public void GotoGameScene()
     {
-        SceneManager.LoadScene("Game");
+        GameManager.instance.SceneChange("Game");
     }
 
 }

@@ -1,21 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance = null;
 
+    public string nowScene;
+
+
+    [SerializeField] private GameObject[] secenPrefub;
+
     public  float time;
     [SerializeField] private float timeLimit;
-    public  bool startArea;
-    public  bool fnishArea;
-    public  int beforeMoney;
-    public  int beforeErement; 
-    public  int money;
-    public  int erement;
+    public bool startArea;
+    public bool fnishArea;
+    public int beforeMoney;
+    public int beforeErement; 
+    public int money;
+    public int erement;
+    public int areaNum;
 
+    bool a=false;
 
     private void Awake()
     {
@@ -41,14 +49,34 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void Init()
     {
+        CreateSecen();
+        nowScene = SceneManager.GetActiveScene().name;
+        areaNum = 0;
         time    = 0;
         money   = 0;
         erement = 0;
+    }
+
+    public void SceneChange(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+        nowScene = sceneName;
+        CreateSecen();
+    }
+
+    public void CreateSecen()
+    {
+        foreach (GameObject num in secenPrefub)
+        {
+            if (num.name == nowScene)
+            {
+                Instantiate(num);
+            }
+        }
     }
 
     public void StartArea()
@@ -67,6 +95,8 @@ public class GameManager : MonoBehaviour
 
     public void BattleArea()
     {
+
+
         TimeUpdate();
         if (time >= timeLimit)
         {
@@ -83,6 +113,8 @@ public class GameManager : MonoBehaviour
     {
 
     }
+
+
 
     public void TimeUpdate()
     {
