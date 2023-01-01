@@ -18,7 +18,7 @@ public class EnemyCtrl : MonoBehaviour
     private List<GameObject> weakEnemyList;
     private List<GameObject> strongEnemyList;
 
-    [SerializeField] private GameObject[] allEnemySpornPosi;
+    private GameObject[] allEnemySpornPosi;
     private List<GameObject> enemySpornPosi;
 
     [SerializeField] private float EnemySpornRate;
@@ -107,5 +107,10 @@ public class EnemyCtrl : MonoBehaviour
         spronPosiValu = Random.Range(0, enemySpornPosi.Count);
 
         Instantiate(enemyList[enemyTypeValu], enemySpornPosi[spronPosiValu].transform);
+    }
+
+    public void set_allEnemySpornPosi(GameObject[] enemySpornPosiOnMap)
+    {
+        allEnemySpornPosi = enemySpornPosiOnMap;
     }
 }

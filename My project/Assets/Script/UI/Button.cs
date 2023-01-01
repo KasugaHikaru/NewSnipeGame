@@ -7,7 +7,7 @@ public class Button : MonoBehaviour
 {
     public void GotoGameScene()
     {
-        GameManager.instance.SceneChange("Game");
+        GameManager.instance.ChangeScene("Game");
     }
 
 }

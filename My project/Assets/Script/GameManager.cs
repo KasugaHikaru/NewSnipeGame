@@ -9,21 +9,18 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     public string nowScene;
-
-
     [SerializeField] private GameObject[] secenPrefub;
 
-    public  float time;
+
+    public float time;
     [SerializeField] private float timeLimit;
     public bool startArea;
     public bool fnishArea;
     public int beforeMoney;
-    public int beforeErement; 
+    public int beforeErement;
     public int money;
     public int erement;
     public int areaNum;
-
-    bool a=false;
 
     private void Awake()
     {
@@ -53,15 +50,15 @@ public class GameManager : MonoBehaviour
 
     public void Init()
     {
-        CreateSecen();
         nowScene = SceneManager.GetActiveScene().name;
+        CreateSecen();
         areaNum = 0;
-        time    = 0;
-        money   = 0;
+        time = 0;
+        money = 0;
         erement = 0;
     }
 
-    public void SceneChange(string sceneName)
+    public void ChangeScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
         nowScene = sceneName;
@@ -86,7 +83,6 @@ public class GameManager : MonoBehaviour
         beforeMoney = money;
         beforeErement = erement;
     }
-
     public void FnishArea()
     {
 
@@ -113,8 +109,6 @@ public class GameManager : MonoBehaviour
     {
 
     }
-
-
 
     public void TimeUpdate()
     {
