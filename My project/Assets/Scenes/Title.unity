@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &2103709603
+--- !u!1001 &732037366
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -140,15 +140,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6071744580661121250, guid: 6f35475195487ed41873303b6946e293, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 73.769424
       objectReference: {fileID: 0}
     - target: {fileID: 6071744580661121250, guid: 6f35475195487ed41873303b6946e293, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -48.735287
       objectReference: {fileID: 0}
     - target: {fileID: 6071744580661121250, guid: 6f35475195487ed41873303b6946e293, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -154.55818
       objectReference: {fileID: 0}
     - target: {fileID: 6071744580661121250, guid: 6f35475195487ed41873303b6946e293, type: 3}
       propertyPath: m_LocalRotation.w
@@ -177,22 +177,6 @@ PrefabInstance:
     - target: {fileID: 6071744580661121250, guid: 6f35475195487ed41873303b6946e293, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6071744580661121251, guid: 6f35475195487ed41873303b6946e293, type: 3}
-      propertyPath: secenPrefub.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6071744580661121251, guid: 6f35475195487ed41873303b6946e293, type: 3}
-      propertyPath: secenPrefub.Array.data[0]
-      value: 
-      objectReference: {fileID: 3513924197199421772, guid: cae652573323fc440bd4bf46544c45ca, type: 3}
-    - target: {fileID: 6071744580661121251, guid: 6f35475195487ed41873303b6946e293, type: 3}
-      propertyPath: secenPrefubName.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6071744580661121251, guid: 6f35475195487ed41873303b6946e293, type: 3}
-      propertyPath: secenPrefubName.Array.data[0]
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f35475195487ed41873303b6946e293, type: 3}
