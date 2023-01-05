@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] secenPrefub;
     [SerializeField] private GameObject[] screenPrefub;
 
+    [SerializeField] private List<GameObject> haveMainWepon;
+    [SerializeField] private List<GameObject> haveSubWepon;
+
     private float time;
     [SerializeField] private float timeLimit;
     private bool startArea;
@@ -24,8 +27,6 @@ public class GameManager : MonoBehaviour
     private int  areaNum;
 
     private string nowScreen;
-
-
 
     private void Awake()
     {
@@ -56,7 +57,7 @@ public class GameManager : MonoBehaviour
     public void Init()
     {
         nowScene = SceneManager.GetActiveScene().name;
-        CreateSecen();
+       // CreateSecen();
         areaNum = 0;
         time = 0;
         money = 0;
@@ -68,23 +69,21 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(nextSceneName);
         nowScene = nextSceneName;
-        CreateSecen();
+        //CreateSecen();
     }
 
-    public void CreateSecen()
-    {
-        foreach (GameObject screnObj in secenPrefub)
-        {
-            if (screnObj.name == nowScene)
-            {
-                Instantiate(screnObj);
-            }
-            else
-            {
-                Debug.Log("SecenObjct not found");
-            }
-        }
-    }
+    //public void CreateSecen()
+    //{
+    //    foreach (GameObject screnObj in secenPrefub)
+    //    {
+    //        if (screnObj.name == nowScene)
+    //        {
+    //            Instantiate(screnObj);
+    //            return;
+    //        }                   
+    //    }
+    //    Debug.Log("SecenObjct not found");
+    //}
 
 
     //public void AddSecenComponent(string componentName)
@@ -102,7 +101,7 @@ public class GameManager : MonoBehaviour
     //}
 
 
-    public void CangeScreen(string nextScreenName)
+    public void ChangeScreen(string nextScreenName)
     {
         nowScreen = nextScreenName;
         CreateScreen();
@@ -115,30 +114,25 @@ public class GameManager : MonoBehaviour
             if (screenObj.name == nowScreen)
             {
                 Instantiate(screenObj);
+                return;
             }
-            else
-            {
-                Debug.Log("ScreenObjct not found");
-            }
+           
         }
+        Debug.Log("ScreenObjct not found");   
     }
 
-   //public void CreateChoiceWeponScreen()
-   //{
-   //
-   //}
-   //public void CreateChoiceWeponScreen()
-   //{
-   //
-   //}
-   //public void CreateChoiceWeponScreen()
-   //{
-   //
-   //}
-   //public void CreateChoiceWeponScreen()
-   //{
-   //
-   //}
+    public void SetWepon(GameObject wepon,bool type)
+    {
+        if (type)
+        {
+            haveMainWepon.Add(wepon);
+        }
+        else if (!type)
+        {
+            haveSubWepon.Add(wepon);
+        }
+
+    }
 
     public void StartArea()
     {
@@ -179,18 +173,6 @@ public class GameManager : MonoBehaviour
         time += Time.deltaTime;
     }
 
-
-   // public void set_nowScreen(SCREEN_NAME value)
-   // {
-   //     nowScreen = value;
-   //
-   // }
-   //
-   // public SCREEN_NAME get_nowScreen()
-   // {
-   //     return nowScreen;
-   // }
-   //
     public float get_time()
     {
         return time;

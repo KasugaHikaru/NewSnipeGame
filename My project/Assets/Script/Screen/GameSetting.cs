@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Title : MonoBehaviour
+public class GameSetting : MonoBehaviour
 {
-
-    [SerializeField] private GameObject secenPrefub;
 
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(secenPrefub);
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
     }
 }

@@ -9,6 +9,6 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.instance.CangeScreen("ChoiceWepon");
+        GameManager.instance.ChangeScreen("ChoiceWepon");
     }
 }

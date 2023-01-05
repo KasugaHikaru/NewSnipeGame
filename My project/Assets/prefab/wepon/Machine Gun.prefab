@@ -633,13 +633,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3197e6286d18c49938f0fcafffe00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weponName: MachineGun
+  weponImg: {fileID: 21300000, guid: 442b7b42d09097349befcfde6d8a910a, type: 3}
   bulletPrefab: {fileID: 1564378819802512453, guid: c3ae0039351c60e419860da25d87f53a, type: 3}
   damage: 3
   bulletSpeed: 3000
-  shootRate: 20
-  maxClipAmmo: 35
+  rate: 0
+  magazineSize: 0
   shootType: 1
   zoomFVO: 50
+  weponType: 1
 --- !u!1 &7287000783492341220
 GameObject:
   m_ObjectHideFlags: 0

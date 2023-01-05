@@ -47,6 +47,7 @@ MonoBehaviour:
   secenPrefub:
   - {fileID: 3513924197199421772, guid: cae652573323fc440bd4bf46544c45ca, type: 3}
   - {fileID: 3054311802165107552, guid: 4194b2805a454d04780edc16107e76f4, type: 3}
+  - {fileID: 3090198364500622002, guid: a48feffbb4bf6c04f8aa333269ef772d, type: 3}
   screenPrefub:
-  - {fileID: 0}
+  - {fileID: 3299974284701349565, guid: 44662547af434cc408f4a12eda335264, type: 3}
   timeLimit: 0

@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3197e6286d18c49938f0fcafffe00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weponName: Pistol
+  weponImg: {fileID: 21300000, guid: 37cc616052567ba43a96cadcf0d57f18, type: 3}
   bulletPrefab: {fileID: 1564378819802512453, guid: c3ae0039351c60e419860da25d87f53a, type: 3}
   damage: 5
   bulletSpeed: 2500

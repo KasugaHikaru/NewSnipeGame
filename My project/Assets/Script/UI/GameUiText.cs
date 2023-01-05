@@ -16,7 +16,7 @@ public class GameUiText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moneyText = moneyObj.GetComponent<TextMeshProUGUI>();
+        moneyText   = moneyObj.GetComponent<TextMeshProUGUI>();
         erementText = erementObj.GetComponent<TextMeshProUGUI>();
         //timeText = timeObj.GetComponent<Text>();
     }

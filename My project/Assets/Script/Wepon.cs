@@ -23,10 +23,9 @@ public class Wepon : MonoBehaviour
     private int nowWeponNumber;
 
     private GameObject bulletPrefab;
-    private int   damage;
     private float bulletSpeed;
-    private float shootRate;
-    private int   maxClipAmmo;
+    private float rate;
+    private int   magazineSize;
     private bool  shootType;
     private float zoomSpeed;
 
@@ -126,7 +125,7 @@ public class Wepon : MonoBehaviour
 
     public void Reload()
     {
-        clipAmmo[nowWeponNumber] = maxClipAmmo;
+        clipAmmo[nowWeponNumber] = magazineSize;
     }
 
     public void ChangeWepon(int valu)
@@ -148,19 +147,18 @@ public class Wepon : MonoBehaviour
     public void ChangeWeponInit()
     {
         bulletPrefab = weponStatus.get_bulletPrefab();
-        damage       = weponStatus.get_damage();
         bulletSpeed  = weponStatus.get_bulletSpeed();
-        shootRate    = weponStatus.get_shootRate();
-        maxClipAmmo  = weponStatus.get_maxClipAmmo();
+        rate    = weponStatus.get_shootRate();
+        magazineSize  = weponStatus.get_maxClipAmmo();
         shootType    = weponStatus.get_shootType();
         zoomFOV      = weponStatus.get_zoomFVO();
 
         muzzle = NowWepon.transform.Find("MuzzlePosi").gameObject;
-        shootRateNum = shootRate;
+        shootRateNum = rate;
 
         if (clipAmmo[nowWeponNumber] == -1)
         {
-            clipAmmo[nowWeponNumber] = maxClipAmmo;
+            clipAmmo[nowWeponNumber] = magazineSize;
         }
 
     }
@@ -168,12 +166,12 @@ public class Wepon : MonoBehaviour
     public void CanShoot()
     {
         //éÀåÇÉåÅ[Ég,canShotä«óù
-        if (shootRateNum < shootRate)
+        if (shootRateNum < rate)
         {
             shootRateNum++;
         }
 
-        if (shootRateNum == shootRate && clipAmmo[nowWeponNumber] > 0)
+        if (shootRateNum == rate && clipAmmo[nowWeponNumber] > 0)
         {    
              canShoot = true;
         }
