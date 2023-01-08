@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ChangeSceneScreen : MonoBehaviour
+public class Button : MonoBehaviour
 {
 
     //Secen
@@ -25,15 +25,9 @@ public class ChangeSceneScreen : MonoBehaviour
     {
         GameManager.instance.ChangeScreen("ChoiceWepon");
     }
-
     public void GotoGameSettingScreen()
     {
         GameManager.instance.ChangeScreen("GameSetting");
-    }
-
-    public void GotoRouteMapScreen()
-    {
-        GameManager.instance.ChangeScreen("RouteMap");
     }
 
 

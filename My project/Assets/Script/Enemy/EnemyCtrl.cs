@@ -78,17 +78,17 @@ public class EnemyCtrl : MonoBehaviour
 
     }
 
-    public List<GameObject> ListSet_(int times, GameObject[] allLsit)
+    public List<GameObject> ListSet_(int valu, GameObject[] allLsit)
     {
         List<GameObject> list = new List<GameObject>();
 
-        for (int i = 0; i < times; i++)
+        for (int i = 0; i < valu; i++)
         {
-            int randomValu;
-            randomValu = Random.Range(0, allLsit.Length);
-            if (!list.Contains(allLsit[randomValu]))
+            int randomNum;
+            randomNum = Random.Range(0, allLsit.Length);
+            if (!list.Contains(allLsit[randomNum]))
             {
-                list.Add(allLsit[randomValu]);
+                list.Add(allLsit[randomNum]);
             }
             else
             {

@@ -9,22 +9,20 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance = null;
 
-    private string nowScene;
+    [SerializeField] private GameObject screenObjParetPrefub;
+    private GameObject screenObjParet = null;
+
     [SerializeField] private GameObject[] secenPrefub;
     [SerializeField] private GameObject[] screenPrefub;
 
-    [SerializeField] private List<GameObject> haveMainWepon;
-    [SerializeField] private List<GameObject> haveSubWepon;
+    public List<GameObject> haveMainWepon;
+    public List<GameObject> haveSubWepon;
 
     private float time;
     [SerializeField] private float timeLimit;
-    private bool startArea;
-    private bool fnishArea;
-    private int  beforeMoney;
-    private int  beforeErement;
+
     private int  money;
     private int  erement;
-    private int  areaNum;
 
     private string nowScreen;
 
@@ -52,23 +50,23 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void Init()
     {
-        nowScene = SceneManager.GetActiveScene().name;
        // CreateSecen();
-        areaNum = 0;
         time = 0;
         money = 0;
         erement = 0;
+
     }
 
 
     public void ChangeScene(string nextSceneName)
     {
         SceneManager.LoadScene(nextSceneName);
-        nowScene = nextSceneName;
+        //nowScene = nextSceneName;
         //CreateSecen();
     }
 
@@ -109,11 +107,16 @@ public class GameManager : MonoBehaviour
 
     public void CreateScreen()
     {
+        if (screenObjParet == null) 
+        {
+            screenObjParet = Instantiate(screenObjParetPrefub);
+        }
         foreach (GameObject screenObj in screenPrefub)
         {
             if (screenObj.name == nowScreen)
             {
-                Instantiate(screenObj);
+                GameObject obj = Instantiate(screenObj);
+                obj.transform.parent = screenObjParet.transform;
                 return;
             }
            
@@ -121,51 +124,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("ScreenObjct not found");   
     }
 
-    public void SetWepon(GameObject wepon,bool type)
+    public void SetMainWepon(GameObject wepon)
     {
-        if (type)
-        {
-            haveMainWepon.Add(wepon);
-        }
-        else if (!type)
-        {
-            haveSubWepon.Add(wepon);
-        }
-
+        haveMainWepon.Add(wepon);
     }
-
-    public void StartArea()
+    public void SetSubWepon(GameObject wepon)
     {
-        startArea = true;
-        time = 0;
-        beforeMoney = money;
-        beforeErement = erement;
-    }
-    public void FnishArea()
-    {
-
-    }
-
-
-    public void BattleArea()
-    {
-
-
-        TimeUpdate();
-        if (time >= timeLimit)
-        {
-            FnishArea();
-        }
-    }
-
-    public void ShopArea()
-    {
-
-    }
-
-    public void StrengthenArea()
-    {
-
+        haveSubWepon.Add(wepon);
     }
 
     public void TimeUpdate()
@@ -194,6 +159,5 @@ public class GameManager : MonoBehaviour
     {
         erement += value;
     }
-
 
 }

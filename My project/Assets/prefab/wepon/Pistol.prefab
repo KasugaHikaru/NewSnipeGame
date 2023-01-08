@@ -52,10 +52,11 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1564378819802512453, guid: c3ae0039351c60e419860da25d87f53a, type: 3}
   damage: 5
   bulletSpeed: 2500
-  shootRate: 35
-  maxClipAmmo: 15
+  rate: 35
+  magazineSize: 15
   shootType: 0
   zoomFVO: 50
+  weponType: 0
 --- !u!1 &853257293435948535
 GameObject:
   m_ObjectHideFlags: 0

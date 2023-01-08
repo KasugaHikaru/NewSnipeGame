@@ -50,6 +50,7 @@ public class ChoiceWepon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void Init()
@@ -85,13 +86,15 @@ public class ChoiceWepon : MonoBehaviour
 
     public void SetWepon()
     {
-        GameManager.instance.SetWepon(allMainWepon[choiceMainNumver], mainStatusScrpt.get_weponType());
-        GameManager.instance.SetWepon(allSubWepon[choiceSubNumver]  , subStatusScrpt .get_weponType());
+        GameManager.instance.haveMainWepon.Add(allMainWepon[choiceMainNumver]);
+        GameManager.instance.haveSubWepon.Add(allSubWepon[choiceSubNumver]);
+        
+        //GameManager.instance.SetMainWepon(allMainWepon[choiceMainNumver]);
+        //GameManager.instance.SetSubWepon (allSubWepon[choiceSubNumver]);
     }
 
     public void MainStatusSet()
     {
-    
         choiceMainNumver = Mathf.Clamp(choiceMainNumver, 0, allMainWepon.Length - 1);
     
         //スクリプト
@@ -150,4 +153,12 @@ public class ChoiceWepon : MonoBehaviour
     
     }
 
+    public void EnabledFalse()
+    {
+        this.gameObject.SetActive(false);
+    }
+    public void EnabledTrue()
+    {
+        this.gameObject.SetActive(true);
+    }
 }
