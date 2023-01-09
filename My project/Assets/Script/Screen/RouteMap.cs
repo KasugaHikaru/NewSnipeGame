@@ -168,6 +168,11 @@ public class RouteMap : MonoBehaviour
         routeMapCamera.transform.rotation = normalCameraQuate;
     }
 
+    public void NextScreen()
+    {
+        GameManager.instance.ChangeScreen(areaNameText.text);
+    }
+
     public void AreaInfoUiActiveTrue()
     {
         areaInfoUi.SetActive(true);
