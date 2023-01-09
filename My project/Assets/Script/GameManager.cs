@@ -59,7 +59,6 @@ public class GameManager : MonoBehaviour
         time = 0;
         money = 0;
         erement = 0;
-
     }
 
 

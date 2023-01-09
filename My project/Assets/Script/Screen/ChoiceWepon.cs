@@ -153,11 +153,11 @@ public class ChoiceWepon : MonoBehaviour
     
     }
 
-    public void EnabledFalse()
+    public void ActiveFalse()
     {
         this.gameObject.SetActive(false);
     }
-    public void EnabledTrue()
+    public void ActiveTrue()
     {
         this.gameObject.SetActive(true);
     }

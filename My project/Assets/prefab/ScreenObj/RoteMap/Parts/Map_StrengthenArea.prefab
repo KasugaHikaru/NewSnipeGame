@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8504352899598350561}
   - component: {fileID: 9136244267724842222}
   - component: {fileID: 923936115611194597}
-  - component: {fileID: 4441362967998901431}
+  - component: {fileID: 8690899429416494592}
   m_Layer: 0
   m_Name: Map_StrengthenArea
   m_TagString: Untagged
@@ -707,7 +707,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &4441362967998901431
+--- !u!114 &8690899429416494592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -716,6 +716,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2652260112312640719}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51528ca5f790a6948acac33c4fa971fc, type: 3}
+  m_Script: {fileID: 11500000, guid: db91e756e1391ad4f92fbe38a15d3b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  areaName: Streng
+  areaInfo: "\u30A8\u30EC\u30E1\u30F3\u30C8\u3092\u6D88\u8CBB\u3057\u3066\u6B66\u5668\u3092\u5F37\u5316\u3067\u304D\u308B\u30A8\u30EA\u30A2\u3002"
