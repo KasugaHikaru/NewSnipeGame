@@ -3,114 +3,95 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCtrl : MonoBehaviour
-{
-    [SerializeField] private int initWeakEnemyValu;
-    [SerializeField] private int initStrongEnemyValu;
-    [SerializeField] private int initSpornPosiValu;
+{ 
+    private GameObject[] spornWeakEnemy;
+    private GameObject[] spornStrongEnemy;
 
-    private int nowWeakEnemyValu;
-    private int nowStrongEnemyValu;
-    private int nowSpornPosiValu;
+    private GameObject[] enemySpornPosi;
 
-    [SerializeField] private GameObject[] allWeakEnemyList;
-    [SerializeField] private GameObject[] allStrongEnemyList;
+    [SerializeField] private float weakEnemySpornRate;
+    private float weakEnemySpornRateNum;
 
-    private List<GameObject> weakEnemyList;
-    private List<GameObject> strongEnemyList;
+    [SerializeField] private float strongEnemySpornRate;
+    private float strongEnemySpornRateNum;
 
-    private GameObject[] allEnemySpornPosi;
-    private List<GameObject> enemySpornPosi;
+    private bool start;
 
-    [SerializeField] private float EnemySpornRate;
-    private float EnemySpornRateNum;
-
-    private int   wave;
-    [SerializeField] private int fnishWave;
-    private bool  waveStart;
-
-
-    // Start is called before the first frame update
+    //Start is called before the first frame update
     void Start()
     {
         Init();
     }
-
+    
     // Update is called once per frame
     void Update()
     {
-        Updata();
+        if (start)
+        {
+            Updata();
+        }
     }
-
+    
     public void Init()
     {
-        nowWeakEnemyValu   = initWeakEnemyValu;
-        nowStrongEnemyValu = initStrongEnemyValu;
-        nowSpornPosiValu   = initSpornPosiValu;
-
-        weakEnemyList   = null;
-        strongEnemyList = null;
-        enemySpornPosi  = null;
-
-        EnemySpornRateNum = 0;
-
-        wave = 0;
-        waveStart = true;
+        start = false;
+        weakEnemySpornRateNum = 0;
+        strongEnemySpornRateNum = 0;
     }
-
+    
     public void Updata()
     {
-        if (waveStart)
-        {
-            weakEnemyList   = ListSet_(nowWeakEnemyValu, allWeakEnemyList);
-            strongEnemyList = ListSet_(nowStrongEnemyValu, allStrongEnemyList);
-            enemySpornPosi  = ListSet_(nowSpornPosiValu, allEnemySpornPosi);
-            wave++;
-            waveStart = false;
-        }
+        weakEnemySpornRateNum += Time.deltaTime;
+        strongEnemySpornRateNum += Time.deltaTime;
 
-        EnemySpornRateNum += Time.deltaTime;
+        if (weakEnemySpornRateNum >= weakEnemySpornRate)
+        {
+            EnemySporn(spornWeakEnemy);
+            weakEnemySpornRateNum = 0;
+        }
         
-        if (EnemySpornRateNum >= EnemySpornRate)
+        if (strongEnemySpornRateNum >= strongEnemySpornRate)
         {
-            EnemySporn(weakEnemyList);
-            EnemySpornRateNum = 0;
+            EnemySporn(spornStrongEnemy);
+            strongEnemySpornRateNum = 0;
         }
-
     }
-
-    public List<GameObject> ListSet_(int valu, GameObject[] allLsit)
-    {
-        List<GameObject> list = new List<GameObject>();
-
-        for (int i = 0; i < valu; i++)
-        {
-            int randomNum;
-            randomNum = Random.Range(0, allLsit.Length);
-            if (!list.Contains(allLsit[randomNum]))
-            {
-                list.Add(allLsit[randomNum]);
-            }
-            else
-            {
-                i--;
-            }
-        }
-        return list;
-    }
-
-    public void EnemySporn(List<GameObject> enemyList)
+    
+    public void EnemySporn(GameObject[] enemy)
     {
         int enemyTypeValu;
-        enemyTypeValu = Random.Range(0, enemyList.Count);
-
+        enemyTypeValu = Random.Range(0, enemy.Length + 1);
+    
         int spronPosiValu;
-        spronPosiValu = Random.Range(0, enemySpornPosi.Count);
+        spronPosiValu = Random.Range(0, enemySpornPosi.Length + 1);
 
-        Instantiate(enemyList[enemyTypeValu], enemySpornPosi[spronPosiValu].transform);
+        if (enemy[enemyTypeValu] != null)
+        {
+            GameObject obj = Instantiate(enemy[enemyTypeValu], enemySpornPosi[spronPosiValu].transform.position,Quaternion.identity,this.transform);
+        }
+        else
+        {
+
+        }
+    }
+    
+    public void set_enemySpornPosi(GameObject[] enemySpornPosiOnMap)
+    {
+        enemySpornPosi = enemySpornPosiOnMap;
+    }
+    
+    public void set_spornWeakEnemy(GameObject[] weakEnemy)
+    {
+        spornWeakEnemy = weakEnemy;
     }
 
-    public void set_allEnemySpornPosi(GameObject[] enemySpornPosiOnMap)
+    public void set_spornStrongEnemy(GameObject[] strongEnemy)
     {
-        allEnemySpornPosi = enemySpornPosiOnMap;
+        spornStrongEnemy = strongEnemy;
+    }
+
+    public void startFlag()
+    {
+        start = true;
     }
 }

@@ -4,41 +4,43 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ChoiceWepon : MonoBehaviour
+public class ReadyUi : MonoBehaviour
 {
-    
+    [SerializeField] private GameObject playerCtrl;
+    private Wepon weponScrpt;
+
     private WeponStatus mainStatusScrpt;
-    [SerializeField] private Image           mainImg;
+    [SerializeField] private Image mainImg;
     [SerializeField] private TextMeshProUGUI mainNameText;
     [SerializeField] private TextMeshProUGUI mainDamageText;
-    [SerializeField] private Slider          mainDamageSlider;
+    [SerializeField] private Slider mainDamageSlider;
     [SerializeField] private TextMeshProUGUI mainRateText;
-    [SerializeField] private Slider          mainRateSlider;
+    [SerializeField] private Slider mainRateSlider;
     [SerializeField] private TextMeshProUGUI mainMagazinSizeText;
-    [SerializeField] private Slider          mainMagazinSizeSlider;
+    [SerializeField] private Slider mainMagazinSizeSlider;
     [SerializeField] private TextMeshProUGUI mainTypeOfFireText;
 
     [Header("")]
 
     private WeponStatus subStatusScrpt;
-    [SerializeField] private Image           subImg;
+    [SerializeField] private Image subImg;
     [SerializeField] private TextMeshProUGUI subNameText;
     [SerializeField] private TextMeshProUGUI subDamageText;
-    [SerializeField] private Slider          subDamageSlider;
+    [SerializeField] private Slider subDamageSlider;
     [SerializeField] private TextMeshProUGUI subRateText;
-    [SerializeField] private Slider          subRateSlider;
+    [SerializeField] private Slider subRateSlider;
     [SerializeField] private TextMeshProUGUI subMagazinSizeText;
-    [SerializeField] private Slider          subMagazinSizeSlider;
+    [SerializeField] private Slider subMagazinSizeSlider;
     [SerializeField] private TextMeshProUGUI subTypeOfFireText;
 
-    [SerializeField] private GameObject[] allMainWepon;
-    [SerializeField] private GameObject[] allSubWepon;
+    private List<GameObject> allMainWepon = new List<GameObject>();
+    private List<GameObject> allSubWepon  = new List<GameObject>();
 
     private int choiceMainNumver;
     private int choiceSubNumver;
 
-    private const int MaxDamage      = 10;
-    private const int MaxRate        = 50;
+    private const int MaxDamage = 10;
+    private const int MaxRate = 50;
     private const int MaxMagazinSize = 50;
 
     // Start is called before the first frame update
@@ -55,8 +57,12 @@ public class ChoiceWepon : MonoBehaviour
 
     public void Init()
     {
+        weponScrpt = playerCtrl.GetComponent<Wepon>();
+        allMainWepon = GameManager.instance.get_haveMainWepon();
+        allSubWepon  = GameManager.instance.get_haveSubWepon();
+
         choiceMainNumver = 0;
-        choiceSubNumver  = 0;
+        choiceSubNumver = 0;
 
         MainStatusSet();
         SubStatusSet();
@@ -84,35 +90,28 @@ public class ChoiceWepon : MonoBehaviour
         SubStatusSet();
     }
 
-    public void SetWeponForGameManager()
+    public void SetWeponForPlayer()
     {
-        //GameManager.instance.haveMainWepon = null;
-        //GameManager.instance.haveSubWepon  = null;
-
-        //GameManager.instance.haveMainWepon.Add(allMainWepon[choiceMainNumver]);
-        //GameManager.instance.haveSubWepon. Add(allSubWepon[choiceSubNumver]);
-        
-        GameManager.instance.set_haveMainWepon(allMainWepon[choiceMainNumver]);
-        GameManager.instance.set_haveSubWepon(allSubWepon[choiceSubNumver]);
+        weponScrpt.set_wepon(allMainWepon[choiceMainNumver], allSubWepon[choiceSubNumver]);
     }
 
     public void MainStatusSet()
     {
-        choiceMainNumver = Mathf.Clamp(choiceMainNumver, 0, allMainWepon.Length - 1);
-    
+        choiceMainNumver = Mathf.Clamp(choiceMainNumver, 0, allMainWepon.Count- 1);
+
         //スクリプト
         mainStatusScrpt = allMainWepon[choiceMainNumver].GetComponent<WeponStatus>();
-        
+
         //イメージ
-        mainImg.sprite           = mainStatusScrpt.get_weponImg();
+        mainImg.sprite = mainStatusScrpt.get_weponImg();
         //テキスト
-        mainNameText.text        = mainStatusScrpt.get_weponName();
-        mainDamageText.text      = mainStatusScrpt.get_damage().ToString();
-        mainRateText.text        = mainStatusScrpt.get_shootRate().ToString();
+        mainNameText.text = mainStatusScrpt.get_weponName();
+        mainDamageText.text = mainStatusScrpt.get_damage().ToString();
+        mainRateText.text = mainStatusScrpt.get_shootRate().ToString();
         mainMagazinSizeText.text = mainStatusScrpt.get_maxClipAmmo().ToString();
         //スライダー
-        mainDamageSlider.value      = (float)mainStatusScrpt.get_damage()      / MaxDamage;
-        mainRateSlider.value        = (float)mainStatusScrpt.get_shootRate()   / MaxRate;
+        mainDamageSlider.value = (float)mainStatusScrpt.get_damage() / MaxDamage;
+        mainRateSlider.value = (float)mainStatusScrpt.get_shootRate() / MaxRate;
         mainMagazinSizeSlider.value = (float)mainStatusScrpt.get_maxClipAmmo() / MaxMagazinSize;
 
         if (mainStatusScrpt.get_shootType())
@@ -127,22 +126,22 @@ public class ChoiceWepon : MonoBehaviour
     }
     public void SubStatusSet()
     {
-    
-        choiceSubNumver = Mathf.Clamp(choiceSubNumver, 0, allSubWepon.Length - 1);
-        
+
+        choiceSubNumver = Mathf.Clamp(choiceSubNumver, 0, allSubWepon.Count - 1);
+
         //スクリプト
         subStatusScrpt = allSubWepon[choiceSubNumver].GetComponent<WeponStatus>();
-    
+
         //イメージ
-        subImg.sprite           = subStatusScrpt.get_weponImg();
+        subImg.sprite = subStatusScrpt.get_weponImg();
         //テキスト
-        subNameText.text        = subStatusScrpt.get_weponName();
-        subDamageText.text      = subStatusScrpt.get_damage().ToString();
-        subRateText.text        = subStatusScrpt.get_shootRate().ToString();
+        subNameText.text = subStatusScrpt.get_weponName();
+        subDamageText.text = subStatusScrpt.get_damage().ToString();
+        subRateText.text = subStatusScrpt.get_shootRate().ToString();
         subMagazinSizeText.text = subStatusScrpt.get_maxClipAmmo().ToString();
         //スライダー
-        subDamageSlider.value      = (float)subStatusScrpt.get_damage()      / MaxDamage;
-        subRateSlider.value        = (float)subStatusScrpt.get_shootRate()   / MaxRate;
+        subDamageSlider.value = (float)subStatusScrpt.get_damage() / MaxDamage;
+        subRateSlider.value = (float)subStatusScrpt.get_shootRate() / MaxRate;
         subMagazinSizeSlider.value = (float)subStatusScrpt.get_maxClipAmmo() / MaxMagazinSize;
 
         if (subStatusScrpt.get_shootType())
@@ -153,15 +152,7 @@ public class ChoiceWepon : MonoBehaviour
         {
             subTypeOfFireText.text = "Semi Auto";
         }
-    
+
     }
 
-    public void ActiveFalse()
-    {
-        this.gameObject.SetActive(false);
-    }
-    public void ActiveTrue()
-    {
-        this.gameObject.SetActive(true);
-    }
 }

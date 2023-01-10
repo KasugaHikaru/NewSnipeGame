@@ -51,7 +51,7 @@ MonoBehaviour:
   screenPrefub:
   - {fileID: 3299974284701349565, guid: 44662547af434cc408f4a12eda335264, type: 3}
   - {fileID: 3317492417613188190, guid: cf03ebe9f1b78f84aa3edbe6a04022c5, type: 3}
-  - {fileID: 4454089206329900019, guid: e2c4b4e779e05bb4bb462f43cf3bee3c, type: 3}
+  - {fileID: 4454089206329900019, guid: 81579b5250913444c96815d2f967cd84, type: 3}
   haveMainWepon: []
   haveSubWepon: []
   timeLimit: 0

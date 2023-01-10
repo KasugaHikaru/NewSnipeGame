@@ -83,9 +83,7 @@ public class Player : MonoBehaviour
         }
 
         //ŽËŒ‚
-
-
-        wepon.WeponCtlr(); 
+        //wepon.WeponCtlr(); 
     }
 
 

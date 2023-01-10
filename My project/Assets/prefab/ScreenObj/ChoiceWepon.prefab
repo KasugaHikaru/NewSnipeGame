@@ -9482,7 +9482,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4962489939020903535}
         m_TargetAssemblyTypeName: ChoiceWepon, Assembly-CSharp
-        m_MethodName: SetWepon
+        m_MethodName: SetWeponForGameManager
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

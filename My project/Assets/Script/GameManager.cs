@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] secenPrefub;
     [SerializeField] private GameObject[] screenPrefub;
 
-    public List<GameObject> haveMainWepon;
-    public List<GameObject> haveSubWepon;
+    private List<GameObject> haveMainWepon = new List<GameObject>();
+    private List<GameObject> haveSubWepon  = new List<GameObject>();
 
     private float time;
     [SerializeField] private float timeLimit;
@@ -114,8 +114,7 @@ public class GameManager : MonoBehaviour
         {
             if (screenObj.name == nowScreen)
             {
-                GameObject obj = Instantiate(screenObj);
-                obj.transform.parent = screenObjParet.transform;
+                GameObject obj = Instantiate(screenObj, screenObjParet.transform);
                 return;
             }
            
@@ -123,13 +122,21 @@ public class GameManager : MonoBehaviour
         Debug.Log("ScreenObjct not found");   
     }
 
-    public void SetMainWepon(GameObject wepon)
+    public void set_haveMainWepon(GameObject wepon)
     {
         haveMainWepon.Add(wepon);
     }
-    public void SetSubWepon(GameObject wepon)
+    public void set_haveSubWepon(GameObject wepon)
     {
         haveSubWepon.Add(wepon);
+    }
+    public List<GameObject> get_haveMainWepon()
+    {
+        return haveMainWepon;
+    }
+    public List<GameObject> get_haveSubWepon()
+    {
+        return haveSubWepon;
     }
 
     public void TimeUpdate()

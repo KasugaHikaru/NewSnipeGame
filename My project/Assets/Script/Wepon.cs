@@ -6,57 +6,65 @@ public class Wepon : MonoBehaviour
 {
     [SerializeField] Camera cam;
     private float defaultFOV;
-    private float zoomFOV;
+    private float[] zoomFOV;
 
-    [SerializeField] private GameObject[] wepon;
+    [SerializeField] private GameObject[] weponPrehub = new GameObject[sub + 1];
+    [SerializeField] private GameObject[] wepon = new GameObject[sub + 1];
     [SerializeField] private Transform equipTransform;
 
-    private WeponStatus weponStatus;
+    private WeponStatus[] weponStatus;
 
     private float  shootRateNum = 0.0f;                      //発射レート確認用の変数   
-    private int[]  clipAmmo= { -1,-1,-1};                    //マガジン内の弾薬数
+    private int[]  clipAmmo;                                 //マガジン内の弾薬数
     private bool   canShoot;
 
-    private GameObject muzzle;
-    GameObject NowWepon;
+    private GameObject[] muzzle;
     private int weponNumber;
-    private int nowWeponNumber;
 
-    private GameObject bulletPrefab;
-    private float bulletSpeed;
-    private float rate;
-    private int   magazineSize;
-    private bool  shootType;
-    private float zoomSpeed;
+    private GameObject[] bulletPrefab;
+    private float[]      bulletSpeed;
+    private float[]      rate;
+    private int[]        magazineSize;
+    private bool[]       shootType;
+    private float        zoomSpeed;
+
+    private const int main = 0;
+    private const int sub  = 1;
 
     // Start is called before the first frame update
-    void Start()
+    //void Start()
+    //{
+    //    Init();
+    //}
+
+    private void Update()
     {
-        Init();
+        WeponCtlr();
     }
 
     public void Init()
     {
         zoomSpeed = 0.1f;
-        weponNumber = 1;
-        nowWeponNumber = 0;
+        weponNumber = main;
         canShoot = true;
         defaultFOV = cam.fieldOfView;
-        ChangeWepon(weponNumber);
+        InstantiateWepon();
+        WeponInit(main);
+        WeponInit(sub);
     }
 
 
     public void WeponCtlr()
     {
         //射撃
-        if(!shootType)                   //単発
+        if(!shootType[weponNumber])                   //単発
         {
             if (Input.GetMouseButtonDown(0))
             {
                 Shoot();
             }
         }
-        else if (shootType)              //連射
+        else if (shootType[weponNumber])              //連射
         {
             if (Input.GetMouseButton(0))
             {
@@ -65,7 +73,6 @@ public class Wepon : MonoBehaviour
         }
 
         //ADS
-        
         ADS();
         
 
@@ -78,12 +85,12 @@ public class Wepon : MonoBehaviour
         //武器チェン
         if (Input.GetKeyDown("1"))
         {
-            weponNumber = 1;
+            weponNumber = main;
             ChangeWepon(weponNumber);
         }
         if (Input.GetKeyDown("2"))
         {
-            weponNumber = 2;
+            weponNumber = sub;
             ChangeWepon(weponNumber);
         }
 
@@ -96,11 +103,11 @@ public class Wepon : MonoBehaviour
         if (canShoot)
         {
             //弾の生成
-            GameObject bullet = Instantiate(bulletPrefab, muzzle.transform.position, muzzle.transform.rotation);
+            GameObject bullet = Instantiate(bulletPrefab[weponNumber], muzzle[weponNumber].transform.position, muzzle[weponNumber].transform.rotation);
 
             //弾の方向、ベクトル
             Vector3 force;
-            force = NowWepon.transform.forward * bulletSpeed;
+            force = wepon[weponNumber].transform.forward * bulletSpeed[weponNumber];
             bullet.GetComponent<Rigidbody>().AddForce(force);
 
             //弾、フラグなどの後処理
@@ -115,7 +122,7 @@ public class Wepon : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, zoomFOV, Time.deltaTime / zoomSpeed);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, zoomFOV[weponNumber], Time.deltaTime / zoomSpeed);
         }
         if (!Input.GetMouseButton(1))
         {
@@ -125,53 +132,59 @@ public class Wepon : MonoBehaviour
 
     public void Reload()
     {
-        clipAmmo[nowWeponNumber] = magazineSize;
+        clipAmmo[weponNumber] = magazineSize[weponNumber];
     }
 
-    public void ChangeWepon(int valu)
+    public void ChangeWepon(int value)
     {
-        //既にある武器を消す
-        if (nowWeponNumber != 0)
+        if (value == main)
         {
-            Destroy(equipTransform.GetChild(0).gameObject);
+            wepon[main].SetActive(true);
+            wepon[sub].SetActive(false);
         }
-
-        //武器の生成
-        NowWepon = Instantiate(wepon[valu], equipTransform.transform.position, equipTransform.transform.rotation, equipTransform);
-        nowWeponNumber = valu;
-        weponStatus = wepon[valu].GetComponent<WeponStatus>();      //WeponStatusクラスから武器ステータスの情報を取得
-
-        ChangeWeponInit();
+        if (value == sub)
+        {
+            wepon[main].SetActive(false);
+            wepon[sub].SetActive(true);
+        }
     }
 
-    public void ChangeWeponInit()
+    public void WeponInit(int value)
     {
-        bulletPrefab = weponStatus.get_bulletPrefab();
-        bulletSpeed  = weponStatus.get_bulletSpeed();
-        rate    = weponStatus.get_shootRate();
-        magazineSize  = weponStatus.get_maxClipAmmo();
-        shootType    = weponStatus.get_shootType();
-        zoomFOV      = weponStatus.get_zoomFVO();
+        weponStatus[value]          = wepon[value].GetComponent<WeponStatus>();
+        bulletPrefab[value]   = weponStatus[value].get_bulletPrefab();
+        bulletSpeed[value]    = weponStatus[value].get_bulletSpeed();
+        rate[value]           = weponStatus[value].get_shootRate();
+        magazineSize[value]   = weponStatus[value].get_maxClipAmmo();
+        clipAmmo[value]       = weponStatus[value].get_maxClipAmmo();
+        shootType[value]      = weponStatus[value].get_shootType();
+        zoomFOV[value]        = weponStatus[value].get_zoomFVO();
 
-        muzzle = NowWepon.transform.Find("MuzzlePosi").gameObject;
-        shootRateNum = rate;
+        muzzle[value]         = wepon[value].transform.Find("MuzzlePosi").gameObject;
+        shootRateNum          = rate[value];
+    }
 
-        if (clipAmmo[nowWeponNumber] == -1)
-        {
-            clipAmmo[nowWeponNumber] = magazineSize;
-        }
+    public void InstantiateWepon()
+    {
+        wepon[main] = Instantiate(weponPrehub[main], equipTransform);
+        wepon[main].SetActive(true);
 
+        wepon[sub]  = Instantiate(weponPrehub[sub], equipTransform);
+        wepon[sub].SetActive(false);
+
+        //WeponInit(main);
+        //WeponInit(sub);
     }
 
     public void CanShoot()
     {
         //射撃レート,canShot管理
-        if (shootRateNum < rate)
+        if (shootRateNum < rate[weponNumber])
         {
             shootRateNum++;
         }
 
-        if (shootRateNum == rate && clipAmmo[nowWeponNumber] > 0)
+        if (shootRateNum == rate[weponNumber] && clipAmmo[weponNumber] > 0)
         {    
              canShoot = true;
         }
@@ -179,5 +192,11 @@ public class Wepon : MonoBehaviour
         {
             canShoot = false;
         }
+    }
+
+    public void set_wepon(GameObject mainWepon, GameObject subWepon)
+    {
+        weponPrehub[main] = mainWepon;
+        weponPrehub[sub] = subWepon;
     }
 }

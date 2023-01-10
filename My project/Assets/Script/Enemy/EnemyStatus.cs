@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyStatus : MonoBehaviour
 {
-
+    [SerializeField] private Sprite img;
     [SerializeField] private int maxHp;
     private int hp;
     [SerializeField] private int   damage;
@@ -14,10 +15,14 @@ public class EnemyStatus : MonoBehaviour
     [SerializeField] private int   dropMoney;
     [SerializeField] private int   dropErement;
 
-
     void Start()
     {
         hp = maxHp;
+    }
+
+    public Sprite get_img()
+    {
+        return img;
     }
     public int get_maxHp()
     {
